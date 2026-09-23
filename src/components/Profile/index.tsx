@@ -1,28 +1,34 @@
-import { Skeleton } from 'antd'
-import type { MouseEvent } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Skeleton } from 'antd';
+import type { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import emailIcon from '../../assets/icons/contact-email.svg'
-import messageIcon from '../../assets/icons/contact-message.svg'
-import phoneIcon from '../../assets/icons/contact-phone.svg'
-import telegramIcon from '../../assets/icons/contact-telegram.svg'
-import { useProfile } from '../../hooks/useProfile.ts'
+import emailIcon from '../../assets/icons/contact-email.svg';
+import messageIcon from '../../assets/icons/contact-message.svg';
+import phoneIcon from '../../assets/icons/contact-phone.svg';
+import telegramIcon from '../../assets/icons/contact-telegram.svg';
+import { useProfile } from '../../hooks/useProfile.ts';
 // import { calculateAge } from '../../utils/calculateAge.ts'
-import { ContactRow } from '../ContactRow'
-import styles from './Profile.module.scss'
+import { ContactRow } from '../ContactRow';
+import styles from './Profile.module.scss';
 
 // const { Text } = Typography
 
 function scrollToContact(e: MouseEvent<HTMLAnchorElement>) {
-  e.preventDefault()
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  e.preventDefault();
+  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 }
 
 export function Profile() {
-  const { t } = useTranslation()
-  const { data, loading } = useProfile()
+  const { t } = useTranslation();
+  const { data, loading } = useProfile();
 
-  if (loading || !data) return <Skeleton active paragraph={{ rows: 1 }} />
+  if (loading || !data)
+    return (
+      <Skeleton
+        active
+        paragraph={{ rows: 1 }}
+      />
+    );
 
   // const age = calculateAge(data.birthDate)
 
@@ -50,7 +56,11 @@ export function Profile() {
           iconLabel="Telegram"
           items={data.telegram}
           renderItem={(handle) => (
-            <a href={`https://t.me/${handle.replace('@', '')}`} target="_blank" rel="noreferrer">
+            <a
+              href={`https://t.me/${handle.replace('@', '')}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {handle}
             </a>
           )}
@@ -62,13 +72,16 @@ export function Profile() {
           items={['contact']}
           className={styles['no-print']}
           renderItem={() => (
-            <a href="#contact" onClick={scrollToContact}>
+            <a
+              href="#contact"
+              onClick={scrollToContact}
+            >
               {t('profile.write')}
             </a>
           )}
         />
       </div>
     </>
-  )
+  );
 }
 export default Profile;

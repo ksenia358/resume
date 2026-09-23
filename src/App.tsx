@@ -1,39 +1,60 @@
-import { Card, Flex, Typography } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { Card, Flex, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 
-import profilePhoto from './assets/photos/profile.jpeg'
-import { Certificates } from './components/Certificates.tsx'
-import { ContactForm } from './components/ContactForm'
-import { Education } from './components/Education'
-import { Experience, ExperienceTitle } from './components/Experience'
-import { Footer } from './components/Footer'
-import { GenderBadge } from './components/GenderBadge'
-import { Profile } from './components/Profile'
-import { SectionNav } from './components/Header/SectionNav'
+import profilePhoto from './assets/photos/profile.jpeg';
+import { Certificates } from './components/Certificates.tsx';
+import { ContactForm } from './components/ContactForm';
+import { Education } from './components/Education';
+import { Experience, ExperienceTitle } from './components/Experience';
+import { Footer } from './components/Footer';
+import { GenderBadge } from './components/GenderBadge';
+import { Profile } from './components/Profile';
+import { SectionNav } from './components/Header/SectionNav';
 // import { Skills } from './components/Skills'
-import { ThemeToggle } from './components/ThemeToggle'
-import styles from './App.module.scss'
+import { ThemeToggle } from './components/ThemeToggle';
+import styles from './App.module.scss';
+import classNames from 'classnames';
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 function App() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <>
       <SectionNav />
 
-      <Flex vertical gap="large" className={styles.page}>
-        <Card id="about">
-          <Flex gap="large" wrap="nowrap" justify="space-between" align="start">
+      <Flex
+        vertical
+        className={styles.page}
+      >
+        <Card
+          className={styles.card}
+          id="about"
+        >
+          <Flex
+            gap="large"
+            wrap="nowrap"
+            justify="space-between"
+            align="start"
+          >
             <div className={styles.heroContent}>
-              <Title level={1} className={styles.title}>
+              <Title
+                level={1}
+                className={styles.title}
+              >
                 {t('hero.name')}
               </Title>
-              <Text type="secondary" className={styles.role}>
+              <Text
+                type="secondary"
+                className={styles.role}
+              >
                 {t('hero.role')}
               </Text>
-              <Text type="secondary" className={styles.tagline}>
+              <Text
+                type="secondary"
+                className={styles.tagline}
+              >
                 {t('hero.tagline')}
               </Text>
               <div className={styles.profile}>
@@ -53,23 +74,43 @@ function App() {
           </Flex>
         </Card>
 
-        <Card id="experience" title={<ExperienceTitle />}>
+        <Card
+          classNames={{ header: styles['card-header'] }}
+          className={styles.card}
+          id="experience"
+          title={<ExperienceTitle />}
+        >
           <Experience />
         </Card>
 
-        <Card id="education" title={t('education.title')}>
+        <Card
+          classNames={{ header: styles['card-header'] }}
+          className={styles.card}
+          id="education"
+          title={t('education.title')}
+        >
           <Education />
         </Card>
 
-        <Card id="certificates" title={t('certificates.title')}>
+        <Card
+          classNames={{ header: styles['card-header'] }}
+          className={styles.card}
+          id="certificates"
+          title={t('certificates.title')}
+        >
           <Certificates />
         </Card>
 
-        {/*<Card id="skills" title={t('skills.title')}>*/}
+        {/*<Card classNames={{ header: styles['card-header'] }} className={styles.card} id="skills" title={t('skills.title')}>*/}
         {/*  <Skills />*/}
         {/*</Card>*/}
 
-        <Card id="contact" title={t('contact.title')} className={styles['no-print']}>
+        <Card
+          classNames={{ header: styles['card-header'] }}
+          className={classNames(styles.card, styles['no-print'])}
+          id="contact"
+          title={t('contact.title')}
+        >
           <ContactForm />
         </Card>
 
@@ -78,7 +119,7 @@ function App() {
 
       <ThemeToggle />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

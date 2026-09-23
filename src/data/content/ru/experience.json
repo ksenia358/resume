@@ -7,7 +7,7 @@
     "startDate": "2021-09",
     "endDate": null,
     "highlights": [
-      "Разрабатываю и развиваю административную панель на React и TypeScript: реализую новый функционал и дорабатываю существующий",
+      "Разрабатываю и развиваю административную панель на React и TypeScript для сайта [sodrujestvo.org](https://sodrujestvo.org): реализую новый функционал и дорабатываю существующий",
       "Создаю интерфейсы на Ant Design и внутреннем UI Kit, документирую компоненты в Storybook",
       "Работаю с формами и валидацией на React Hook Form и Yup, управляю состоянием и взаимодействием с API через Redux Toolkit и RTK Query",
       "Интегрирую frontend с backend API и SSO-авторизацией (Casdoor, JWT)",
@@ -88,16 +88,7 @@
       "Поддержка существующих проектов: исправление багов, рефакторинг и развитие функционала",
       "Разработка пользовательских интерфейсов по дизайн-макетам, адаптивная и кроссбраузерная вёрстка"
     ],
-    "technologies": [
-      "HTML",
-      "JavaScript",
-      "CSS",
-      "Thymeleaf",
-      "Ajax",
-      "Git",
-      "Figma",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "JavaScript", "CSS", "Thymeleaf", "Ajax", "Git", "Figma", "PixelPerfect"],
     "web": true
   },
   {
@@ -110,15 +101,7 @@
       "Адаптивная и кроссбраузерная вёрстка интерфейсов, отдельных страниц сайта и лендингов для рекламных акций и спецпроектов по дизайн-макетам с высокой точностью (Pixel Perfect)",
       "Поддержка и доработка сайтов компании: исправление багов, внесение изменений и улучшение существующей вёрстки"
     ],
-    "technologies": [
-      "HTML",
-      "JavaScript",
-      "CSS",
-      "jQuery",
-      "Git",
-      "Adobe Photoshop",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "JavaScript", "CSS", "jQuery", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -134,12 +117,7 @@
       "Интеграция с backend API",
       "Поддержка приложения и исправление багов"
     ],
-    "technologies": [
-      "Xamarin",
-      "Git",
-      "Adobe Photoshop",
-      "PixelPerfect"
-    ],
+    "technologies": ["Xamarin", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -154,15 +132,7 @@
       "Поддержка и развитие корпоративного сайта: исправление багов, доработка существующего и разработка нового функционала",
       "Разработка лендинга компании с нуля"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "Visual Studio (C#)",
-      "Adobe Photoshop",
-      "SVN",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "CSS", "jQuery", "Visual Studio (C#)", "Adobe Photoshop", "SVN", "PixelPerfect"],
     "web": true
   },
   {
@@ -171,16 +141,8 @@
     "role": "Frontend-разработчик",
     "startDate": "2015-02",
     "endDate": "2015-07",
-    "highlights": [
-      "Адаптивная вёрстка виджетов для интеграции на сайты клиентов компании"
-    ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "PixelPerfect",
-      "Adobe Photoshop"
-    ],
+    "highlights": ["Адаптивная вёрстка виджетов для интеграции на сайты клиентов компании"],
+    "technologies": ["HTML", "CSS", "jQuery", "PixelPerfect", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -218,15 +180,7 @@
       "Настройка, ведение и оптимизация рекламных кампаний в Яндекс Директ и Google Ads",
       "Вёрстка HTML-писем с обеспечением корректного отображения в различных почтовых клиентах; подготовка email-рассылок"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "SEO",
-      "Yandex.Direct",
-      "Google Ads",
-      "Adobe Photoshop"
-    ],
+    "technologies": ["HTML", "CSS", "jQuery", "SEO", "Yandex.Direct", "Google Ads", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -240,12 +194,7 @@
       "Вёрстка и SEO-оптимизация сайтов компании; продвижение страниц в ТОП-10 поисковой выдачи",
       "Подготовка технических заданий и постановка задач подрядчикам (копирайтерам и разработчикам), контроль выполнения"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "SEO",
-      "Adobe Photoshop"
-    ],
+    "technologies": ["HTML", "CSS", "SEO", "Adobe Photoshop"],
     "web": true
   },
   {

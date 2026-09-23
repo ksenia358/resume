@@ -1,0 +1,18 @@
+.printOnly {
+  display: none;
+}
+
+.toggle {
+  padding-left: 0;
+}
+
+@media print {
+  .screenOnly,
+  .toggle {
+    display: none !important;
+  }
+
+  .printOnly {
+    display: block;
+  }
+}

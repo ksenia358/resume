@@ -1,0 +1,266 @@
+[
+  {
+    "id": "exp-promsvyazbank",
+    "company": "PJSC Promsvyazbank",
+    "url": "https://www.psbank.ru",
+    "role": "Frontend Developer",
+    "startDate": "2021-09",
+    "endDate": null,
+    "highlights": [
+      "Developing and evolving the admin panel on React and TypeScript: building new functionality and improving existing features",
+      "Building interfaces with Ant Design and an internal UI Kit, documenting components in Storybook",
+      "Working with forms and validation using React Hook Form and Yup, managing state and API interaction via Redux Toolkit and RTK Query",
+      "Integrating the frontend with backend APIs and SSO authentication (Casdoor, JWT)",
+      "Handling localization via i18next",
+      "Covering functionality with unit and e2e tests (Vitest, Playwright)",
+      "Participating in code review, task estimation and planning",
+      "Also contributed to developing and evolving a Vue.js website: built new interfaces and functionality, improved existing solutions, and fixed bugs",
+      "Initiated the introduction of Pixel Perfect interface checks into the development process — this approach is now used by the frontend team and QA to verify implementation matches design mockups",
+      "Ranked in the team's top 3 developers for development quality (lowest defect count and task estimation accuracy), according to internal project statistics for 2026"
+    ],
+    "technologies": [
+      "React",
+      "Vue.js",
+      "TypeScript",
+      "Vite",
+      "Pug",
+      "Ant Design",
+      "Internal UI-kit component development",
+      "Storybook",
+      "Redux Toolkit",
+      "RTK Query",
+      "Axios",
+      "React Hook Form",
+      "Yup",
+      "i18next",
+      "Vitest",
+      "Playwright (E2E)",
+      "Casdoor SSO integration",
+      "JWT",
+      "Git",
+      "GitLab flow",
+      "Code review",
+      "ESLint",
+      "Jira",
+      "JetBrains PhpStorm",
+      "Figma",
+      "PixelPerfect",
+      "Claude Code",
+      "ChatGPT",
+      "CSS",
+      "Sass / SCSS"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dochki-synochki-2019",
+    "company": "Dochki & Synochki, supermarket chain",
+    "role": "Frontend Developer",
+    "startDate": "2019-05",
+    "endDate": "2021-09",
+    "highlights": [
+      "Participating in the gradual migration of an existing website to Vue.js",
+      "Supporting and evolving the existing project: fixing bugs and improving functionality",
+      "Building interfaces from design mockups, pixel-perfect responsive and cross-browser markup"
+    ],
+    "technologies": [
+      "HTML",
+      "Vue.js",
+      "JavaScript",
+      "CSS",
+      "Sass / SCSS",
+      "Pug",
+      "jQuery",
+      "Git",
+      "Figma",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-kupivip",
+    "company": "KupiVip",
+    "role": "Frontend Developer",
+    "startDate": "2018-09",
+    "endDate": "2019-05",
+    "highlights": [
+      "Developing and extending company website functionality using JavaScript",
+      "Maintaining existing projects: fixing bugs, refactoring, and evolving functionality",
+      "Building user interfaces from design mockups, responsive and cross-browser markup"
+    ],
+    "technologies": [
+      "HTML",
+      "JavaScript",
+      "CSS",
+      "Thymeleaf",
+      "Ajax",
+      "Git",
+      "Figma",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dochki-synochki-2016",
+    "company": "Dochki & Synochki, supermarket chain",
+    "role": "Frontend Developer",
+    "startDate": "2016-11",
+    "endDate": "2018-09",
+    "highlights": [
+      "Responsive, cross-browser markup of interfaces, individual site pages, and landing pages for promotions and special projects — pixel-perfect implementation from design mockups",
+      "Supporting and improving the company's websites: fixing bugs, making changes, and enhancing existing markup"
+    ],
+    "technologies": [
+      "HTML",
+      "JavaScript",
+      "CSS",
+      "jQuery",
+      "Git",
+      "Adobe Photoshop",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-wildberries",
+    "company": "Wildberries",
+    "url": "https://www.wildberries.ru/",
+    "role": "Frontend Developer",
+    "startDate": "2016-06",
+    "endDate": "2016-11",
+    "highlights": [
+      "Developing an Android application using Xamarin from design mockups",
+      "Developing and enhancing the application's interfaces and functionality",
+      "Integrating with a backend API",
+      "Maintaining the application and fixing bugs"
+    ],
+    "technologies": [
+      "Xamarin",
+      "Git",
+      "Adobe Photoshop",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dolgi-ru",
+    "company": "Dolgi.ru",
+    "url": "https://dolgi.ru/",
+    "role": "HTML Markup Developer",
+    "startDate": "2015-06",
+    "endDate": "2016-06",
+    "highlights": [
+      "Building web pages from design mockups",
+      "Supporting and evolving the corporate website: fixing bugs, improving existing features and building new ones",
+      "Building the company's landing page from scratch"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "Visual Studio (C#)",
+      "Adobe Photoshop",
+      "SVN",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-lidhacker",
+    "company": "LeadHacker LLC",
+    "role": "Frontend Developer",
+    "startDate": "2015-02",
+    "endDate": "2015-07",
+    "highlights": [
+      "Responsive markup of widgets for integration into client websites"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "PixelPerfect",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-triumph",
+    "company": "Triumph LLC",
+    "role": "HTML Markup Developer",
+    "startDate": "2014-08",
+    "endDate": "2015-02",
+    "highlights": [
+      "Developing and maintaining a website using Erlang",
+      "Migrating an existing website to Angular"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "jQuery",
+      "Angular",
+      "Git",
+      "Erlang",
+      "PixelPerfect",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-jura",
+    "company": "JURA",
+    "role": "Webmaster",
+    "startDate": "2012-08",
+    "endDate": "2014-08",
+    "highlights": [
+      "Markup and SEO optimization of company websites",
+      "Promoting pages into the top 10 search results",
+      "Setting up, managing, and optimizing ad campaigns in Yandex Direct and Google Ads",
+      "Building HTML emails with correct rendering across various email clients; preparing email newsletters"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "SEO",
+      "Yandex.Direct",
+      "Google Ads",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-5-fasadov",
+    "company": "5 Fasadov LLC",
+    "url": "https://www.schiefer.ru/",
+    "role": "Webmaster",
+    "startDate": "2011-01",
+    "endDate": "2012-08",
+    "highlights": [
+      "Markup and SEO optimization of company websites; promoting pages into the top 10 search results",
+      "Preparing technical specifications and assigning tasks to contractors (copywriters and developers), monitoring completion"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "SEO",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-pribor",
+    "company": "Aviaavtomatika Design Bureau",
+    "url": "https://www.kbavia.ru/",
+    "role": "Design Engineer",
+    "startDate": "2007-02",
+    "endDate": "2010-11",
+    "highlights": [
+      "Document management",
+      "Developing engineering design documentation",
+      "Coordinating documentation approval with relevant departments (Quality Control and Military Acceptance)",
+      "Handling the department's economic and contract-related work"
+    ],
+    "web": false
+  }
+]

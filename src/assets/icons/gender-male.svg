@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Мужской">
+  <title>Мужской</title>
+  <circle cx="40" cy="60" r="24" fill="none" stroke="#3B82F6" stroke-width="8" />
+  <line x1="57" y1="43" x2="82" y2="18" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" />
+  <polyline
+    points="62,18 82,18 82,38"
+    fill="none"
+    stroke="#3B82F6"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

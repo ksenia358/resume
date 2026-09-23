@@ -1,0 +1,51 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+}
+
+.heroContent {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
+  margin-bottom: 0 !important;
+}
+
+.role {
+  font-size: 18px;
+}
+
+.tagline {
+  display: block;
+  font-size: 12px;
+  opacity: 0.65;
+  @media print {
+    display: none !important;
+  }
+}
+
+.profile {
+  margin-top: 16px;
+}
+
+.photoWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.photo {
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  @media print {
+    display: none !important;
+  }
+}
+
+.no-print {
+  @media print {
+    display: none !important;
+  }
+}

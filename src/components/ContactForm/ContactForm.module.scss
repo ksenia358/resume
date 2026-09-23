@@ -1,0 +1,6 @@
+.form {
+  max-width: 480px;
+  @media print {
+    display: none !important;
+  }
+}

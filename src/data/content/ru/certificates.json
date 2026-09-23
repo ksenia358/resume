@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cert-react-2023",
+    "name": "React-разработчик",
+    "issuer": "Яндекс Практикум",
+    "issuerUrl": "https://practicum.yandex.com/",
+    "date": "2023"
+  },
+  {
+    "id": "cert-specialist-2020-1",
+    "name": "Vue.js – открытый фреймворк на JavaScript для разработки веб-приложений",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2020"
+  },
+  {
+    "id": "cert-specialist-2020-2",
+    "name": "Vue.js. Расширенные возможности",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2020"
+  },
+  {
+    "id": "cert-js-2011",
+    "name": "JavaScript. Основы веб-программирования",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2011"
+  },
+  {
+    "id": "cert-php-mysql-2010",
+    "name": "PHP. Разработка web-сайтов и взаимодействие с MySQL",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2010"
+  },
+  {
+    "id": "cert-programming-db-2009",
+    "name": "Основы программирования и баз данных",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  },
+  {
+    "id": "cert-html-css-2009",
+    "name": "HTML и CSS. Создание сайтов по стандартам W3C и переход на HTML 5 и CSS 3",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  },
+  {
+    "id": "cert-php-basics-2009",
+    "name": "PHP. Основы создания сайтов",
+    "issuer": "Учебный центр «Специалист» при МГТУ им. Баумана",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  }
+]

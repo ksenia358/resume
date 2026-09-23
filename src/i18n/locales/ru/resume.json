@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "Резюме"
+  },
+  "hero": {
+    "name": "Дериёва Ксения Сергеевна",
+    "role": "Frontend-разработчик",
+    "tagline": "который обожает верстать"
+  },
+  "nav": {
+    "about": "Обо мне",
+    "experience": "Опыт",
+    "education": "Образование",
+    "certificates": "Сертификаты",
+    "skills": "Навыки",
+    "contact": "Контакты"
+  },
+  "experience": {
+    "title": "Опыт работы",
+    "inDevelopment": "в разработке",
+    "showAll": "Показать все места работы",
+    "collapse": "Свернуть"
+  },
+  "education": {
+    "title": "Образование",
+    "showAll": "Показать всё образование",
+    "collapse": "Свернуть"
+  },
+  "certificates": {
+    "title": "Сертификаты",
+    "showAll": "Показать все сертификаты",
+    "collapse": "Свернуть"
+  },
+  "skills": {
+    "title": "Навыки"
+  },
+  "common": {
+    "present": "по настоящее время"
+  },
+  "theme": {
+    "light": "Светлая тема",
+    "dark": "Тёмная тема"
+  },
+  "profile": {
+    "phone": "Телефон",
+    "write": "Написать",
+    "age_one": "Мне {{count}} год",
+    "age_few": "Мне {{count}} года",
+    "age_many": "Мне {{count}} лет",
+    "age_other": "Мне {{count}} лет"
+  },
+  "contact": {
+    "title": "Связаться со мной",
+    "name": "Имя",
+    "email": "Email",
+    "message": "Сообщение",
+    "submit": "Отправить",
+    "sending": "Отправка...",
+    "success": "Сообщение отправлено, спасибо!",
+    "error": "Не удалось отправить сообщение. Попробуйте позже.",
+    "errors": {
+      "nameRequired": "Введите имя",
+      "emailRequired": "Введите email",
+      "emailInvalid": "Некорректный email",
+      "messageRequired": "Введите сообщение",
+      "messageMin": "Сообщение слишком короткое"
+    }
+  }
+}

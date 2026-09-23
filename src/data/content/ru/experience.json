@@ -1,0 +1,266 @@
+[
+  {
+    "id": "exp-promsvyazbank",
+    "company": "ПАО «Промсвязьбанк»",
+    "url": "https://www.psbank.ru",
+    "role": "Frontend-разработчик",
+    "startDate": "2021-09",
+    "endDate": null,
+    "highlights": [
+      "Разрабатываю и развиваю административную панель на React и TypeScript: реализую новый функционал и дорабатываю существующий",
+      "Создаю интерфейсы на Ant Design и внутреннем UI Kit, документирую компоненты в Storybook",
+      "Работаю с формами и валидацией на React Hook Form и Yup, управляю состоянием и взаимодействием с API через Redux Toolkit и RTK Query",
+      "Интегрирую frontend с backend API и SSO-авторизацией (Casdoor, JWT)",
+      "Работаю с локализацией через i18next",
+      "Покрываю функциональность unit- и e2e-тестами (Vitest, Playwright)",
+      "Участвую в code review, оценке и планировании задач",
+      "Также участвовала в разработке и развитии веб-сайта на Vue.js: реализовывала новые интерфейсы и функциональность, дорабатывала существующие решения и исправляла баги",
+      "Инициировала внедрение Pixel Perfect-проверки интерфейсов в процесс разработки — сейчас этот подход используется frontend-командой и QA для контроля соответствия реализации дизайн-макетам",
+      "Вхожу в топ-3 разработчиков команды по качеству разработки (наименьшее количество дефектов и точности оценки задач) согласно внутренней статистике проекта за 2026 год"
+    ],
+    "technologies": [
+      "React",
+      "Vue.js",
+      "TypeScript",
+      "Vite",
+      "Pug",
+      "Ant Design",
+      "UI-KIT",
+      "Storybook",
+      "Redux Toolkit",
+      "RTK Query",
+      "Axios",
+      "React Hook Form",
+      "Yup",
+      "i18next",
+      "Vitest",
+      "Playwright (E2E)",
+      "Интеграция с Casdoor SSO",
+      "JWT",
+      "Git",
+      "GitLab flow",
+      "Code review",
+      "ESLint",
+      "Jira",
+      "JetBrains PhpStorm",
+      "Figma",
+      "PixelPerfect",
+      "Claude Code",
+      "ChatGPT",
+      "CSS",
+      "Sass / SCSS"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dochki-synochki-2019",
+    "company": "Дочки & Сыночки, сеть супермаркетов",
+    "role": "Frontend-разработчик",
+    "startDate": "2019-05",
+    "endDate": "2021-09",
+    "highlights": [
+      "Участие в постепенной миграции существующего сайта на Vue.js",
+      "Поддержка и развитие существующего проекта: исправление багов и доработка функционала",
+      "Разработка интерфейсов по дизайн-макетам, адаптивная и кроссбраузерная вёрстка пиксель в пиксель"
+    ],
+    "technologies": [
+      "HTML",
+      "Vue.js",
+      "JavaScript",
+      "CSS",
+      "Sass / SCSS",
+      "Pug",
+      "jQuery",
+      "Git",
+      "Figma",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-kupivip",
+    "company": "KupiVip",
+    "role": "Frontend-разработчик",
+    "startDate": "2018-09",
+    "endDate": "2019-05",
+    "highlights": [
+      "Разработка и доработка функционала сайтов компании на JavaScript",
+      "Поддержка существующих проектов: исправление багов, рефакторинг и развитие функционала",
+      "Разработка пользовательских интерфейсов по дизайн-макетам, адаптивная и кроссбраузерная вёрстка"
+    ],
+    "technologies": [
+      "HTML",
+      "JavaScript",
+      "CSS",
+      "Thymeleaf",
+      "Ajax",
+      "Git",
+      "Figma",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dochki-synochki-2016",
+    "company": "Дочки & Сыночки, сеть супермаркетов",
+    "role": "Frontend-разработчик",
+    "startDate": "2016-11",
+    "endDate": "2018-09",
+    "highlights": [
+      "Адаптивная и кроссбраузерная вёрстка интерфейсов, отдельных страниц сайта и лендингов для рекламных акций и спецпроектов по дизайн-макетам с высокой точностью (Pixel Perfect)",
+      "Поддержка и доработка сайтов компании: исправление багов, внесение изменений и улучшение существующей вёрстки"
+    ],
+    "technologies": [
+      "HTML",
+      "JavaScript",
+      "CSS",
+      "jQuery",
+      "Git",
+      "Adobe Photoshop",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-wildberries",
+    "company": "Wildberries",
+    "url": "https://www.wildberries.ru/",
+    "role": "Frontend-разработчик",
+    "startDate": "2016-06",
+    "endDate": "2016-11",
+    "highlights": [
+      "Разработка Android-приложения на Xamarin по дизайн-макетам",
+      "Разработка и доработка интерфейсов и функционала приложения",
+      "Интеграция с backend API",
+      "Поддержка приложения и исправление багов"
+    ],
+    "technologies": [
+      "Xamarin",
+      "Git",
+      "Adobe Photoshop",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-dolgi-ru",
+    "company": "Долги.ру",
+    "url": "https://dolgi.ru/",
+    "role": "HTML-верстальщик",
+    "startDate": "2015-06",
+    "endDate": "2016-06",
+    "highlights": [
+      "Вёрстка веб-страниц по дизайн-макетам",
+      "Поддержка и развитие корпоративного сайта: исправление багов, доработка существующего и разработка нового функционала",
+      "Разработка лендинга компании с нуля"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "Visual Studio (C#)",
+      "Adobe Photoshop",
+      "SVN",
+      "PixelPerfect"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-lidhacker",
+    "company": "ООО «Лидхакер»",
+    "role": "Frontend-разработчик",
+    "startDate": "2015-02",
+    "endDate": "2015-07",
+    "highlights": [
+      "Адаптивная вёрстка виджетов для интеграции на сайты клиентов компании"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "PixelPerfect",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-triumph",
+    "company": "ООО «Триумф»",
+    "role": "HTML-верстальщик",
+    "startDate": "2014-08",
+    "endDate": "2015-02",
+    "highlights": [
+      "Разработка и поддержка веб-сайта с использованием Erlang",
+      "Миграция существующего веб-сайта на Angular"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "jQuery",
+      "Angular",
+      "Git",
+      "Erlang",
+      "PixelPerfect",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-jura",
+    "company": "JURA",
+    "role": "Web-мастер",
+    "startDate": "2012-08",
+    "endDate": "2014-08",
+    "highlights": [
+      "Вёрстка и SEO-оптимизация сайтов компании",
+      "Продвижение страниц в ТОП-10 поисковой выдачи",
+      "Настройка, ведение и оптимизация рекламных кампаний в Яндекс Директ и Google Ads",
+      "Вёрстка HTML-писем с обеспечением корректного отображения в различных почтовых клиентах; подготовка email-рассылок"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "SEO",
+      "Yandex.Direct",
+      "Google Ads",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-5-fasadov",
+    "company": "ООО «5 Фасадов»",
+    "url": "https://www.schiefer.ru/",
+    "role": "Web-мастер",
+    "startDate": "2011-01",
+    "endDate": "2012-08",
+    "highlights": [
+      "Вёрстка и SEO-оптимизация сайтов компании; продвижение страниц в ТОП-10 поисковой выдачи",
+      "Подготовка технических заданий и постановка задач подрядчикам (копирайтерам и разработчикам), контроль выполнения"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "SEO",
+      "Adobe Photoshop"
+    ],
+    "web": true
+  },
+  {
+    "id": "exp-pribor",
+    "company": "ОКБ «Авиаавтоматика»",
+    "url": "https://www.kbavia.ru/",
+    "role": "Инженер-конструктор",
+    "startDate": "2007-02",
+    "endDate": "2010-11",
+    "highlights": [
+      "Делопроизводство",
+      "Разработка конструкторской документации",
+      "Согласование документации, соответствующими органами (ОТК и ВП)",
+      "Экономическая и договорная работа отдела"
+    ],
+    "web": false
+  }
+]

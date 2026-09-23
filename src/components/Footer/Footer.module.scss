@@ -1,0 +1,7 @@
+.footer {
+  display: block;
+  text-align: center;
+  @media print {
+    display: none !important;
+  }
+}

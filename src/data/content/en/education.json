@@ -1,0 +1,24 @@
+[
+  {
+    "id": "edu-specialist",
+    "institution": "Kursk State Technical University",
+    "degree": "Specialist Degree",
+    "level": "Higher education",
+    "field": "Design and Technology of Electronic Computing Equipment",
+    "startDate": "2003-09",
+    "endDate": "2008-06",
+    "description": "Faculty of Instrument Engineering",
+    "url": "https://swsu.ru"
+  },
+  {
+    "id": "edu-bachelor",
+    "institution": "Kursk State Technical University",
+    "degree": "Bachelor's Degree",
+    "level": "Higher education",
+    "field": "Design and Technology of Electronic Computing Equipment",
+    "startDate": "2003-09",
+    "endDate": "2007-06",
+    "description": "Faculty of Instrument Engineering",
+    "url": "https://swsu.ru"
+  }
+]

@@ -1,0 +1,41 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  background: #ffffff;
+  @media print {
+    display: none !important;
+  }
+}
+
+html[data-theme='dark'] .bar {
+  background: #20242f;
+}
+
+.desktopNav {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+
+  :global(.ant-anchor-wrapper-horizontal)::before {
+    display: none;
+  }
+}
+
+.burger {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.right {
+  margin-left: auto;
+}

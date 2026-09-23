@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cert-react-2023",
+    "name": "React Developer",
+    "issuer": "Yandex Practicum",
+    "issuerUrl": "https://practicum.yandex.com/",
+    "date": "2023"
+  },
+  {
+    "id": "cert-specialist-2020-1",
+    "name": "Vue.js - an open source JavaScript framework for developing web applications",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2020"
+  },
+  {
+    "id": "cert-specialist-2020-2",
+    "name": "Vue.js. Advanced Capabilities",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2020"
+  },
+  {
+    "id": "cert-js-2011",
+    "name": "Javascript. Web-Development fundamentals",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2011"
+  },
+  {
+    "id": "cert-php-mysql-2010",
+    "name": "PHP. Web-sites development with MySQL",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2010"
+  },
+  {
+    "id": "cert-programming-db-2009",
+    "name": "Programming and Databases fundamentals",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  },
+  {
+    "id": "cert-html-css-2009",
+    "name": "HTML and CSS. Basics",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  },
+  {
+    "id": "cert-php-basics-2009",
+    "name": "PHP. Web-development fundamentals",
+    "issuer": "Computer Training Center «Specialist» at Bauman Moscow State Technical University",
+    "issuerUrl": "https://www.specialist.ru/",
+    "date": "2009"
+  }
+]

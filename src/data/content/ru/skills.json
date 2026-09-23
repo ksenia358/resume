@@ -1,0 +1,149 @@
+[
+  {
+    "id": "frontend-core",
+    "category": "Frontend",
+    "items": [
+      "React",
+      "Vue.js",
+      "Angular",
+      "TypeScript",
+      "JavaScript",
+      "Next.js (App Router, SSR/SSG)",
+      "Vite"
+    ]
+  },
+  {
+    "id": "mobile",
+    "category": "Мобильная разработка",
+    "items": ["Xamarin"]
+  },
+  {
+    "id": "web-fundamentals",
+    "category": "Web-технологии",
+    "items": [
+      "HTML",
+      "CSS",
+      "jQuery",
+      "Ajax",
+      "Pug"
+    ]
+  },
+  {
+    "id": "ui-design-systems",
+    "category": "UI-библиотеки и дизайн-системы",
+    "items": [
+      "Ant Design",
+      "UI-KIT",
+      "Storybook"
+    ]
+  },
+  {
+    "id": "forms",
+    "category": "Формы и валидация",
+    "items": [
+      "React Hook Form",
+      "Yup",
+      "Кастомные схемы валидации"
+    ]
+  },
+  {
+    "id": "state-data",
+    "category": "Состояние и данные",
+    "items": [
+      "Redux Toolkit",
+      "RTK Query",
+      "MSW (Mock Service Worker)",
+      "Axios"
+    ]
+  },
+  {
+    "id": "i18n",
+    "category": "Интернационализация",
+    "items": [
+      "i18next",
+      "Мультиязычный роутинг",
+      "RTL-поддержка",
+      "SEO alternates для многоязычных страниц"
+    ]
+  },
+  {
+    "id": "testing",
+    "category": "Тестирование",
+    "items": [
+      "Vitest",
+      "Playwright (E2E)"
+    ]
+  },
+  {
+    "id": "styling",
+    "category": "Стилизация",
+    "items": [
+      "Sass / SCSS",
+      "Less",
+      "CSS Modules",
+      "classnames"
+    ]
+  },
+  {
+    "id": "interactive-ui",
+    "category": "Интерактивные компоненты",
+    "items": [
+      "@dnd-kit (drag-and-drop)",
+      "EditorJS",
+      "react-dropzone",
+      "date-fns / luxon"
+    ]
+  },
+  {
+    "id": "auth",
+    "category": "Аутентификация и SSO",
+    "items": [
+      "Интеграция с Casdoor SSO",
+      "Формы регистрации и 2FA",
+      "OAuth (VK)",
+      "JWT"
+    ]
+  },
+  {
+    "id": "design-tools",
+    "category": "Дизайн-инструменты",
+    "items": [
+      "Figma",
+      "Adobe Photoshop",
+      "Zeplin",
+      "PixelPerfect"
+    ]
+  },
+  {
+    "id": "ai-tools",
+    "category": "AI-инструменты в разработке",
+    "items": [
+      "Claude Code",
+      "ChatGPT"
+    ]
+  },
+  {
+    "id": "marketing",
+    "category": "Маркетинг и SEO",
+    "items": [
+      "SEO",
+      "Yandex.Direct",
+      "Google Ads"
+    ]
+  },
+  {
+    "id": "process",
+    "category": "Процессы разработки",
+    "items": [
+      "Git",
+      "SVN",
+      "Jira",
+      "Feature-флаги",
+      "GitLab flow",
+      "Code review",
+      "ESLint",
+      "JetBrains PhpStorm",
+      "Visual Studio (C#)"
+    ]
+  }
+]

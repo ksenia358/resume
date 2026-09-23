@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+target="${SWEB_PUBLIC_HTML:-$HOME/public_html}"
+branch="${SWEB_BRANCH:-main}"
+
+while read -r oldrev newrev refname; do
+  if [[ "$refname" == "refs/heads/$branch" ]]; then
+    mkdir -p "$target"
+    GIT_WORK_TREE="$target" git checkout -f "$branch"
+    find "$target" -name ".git" -type d -prune -exec rm -rf {} +
+    echo "Checked out $branch to $target"
+  fi
+done

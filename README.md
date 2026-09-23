@@ -1,5 +1,15 @@
 # React + TypeScript + Vite
 
+## Deploy to SpaceWeb
+
+Build and publish the static `dist` output through Git:
+
+```bash
+./scripts/deploy-sweb.sh 'login@your-domain.ru:~/resume.git'
+```
+
+One-time hosting setup is documented in [docs/sweb-git-deploy.md](docs/sweb-git-deploy.md).
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

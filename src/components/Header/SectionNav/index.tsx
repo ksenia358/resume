@@ -1,27 +1,32 @@
-import { MenuOutlined } from '@ant-design/icons'
-import { Anchor, Button, Drawer } from 'antd'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { MenuOutlined } from '@ant-design/icons';
+import { Anchor, Button, Drawer } from 'antd';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { LanguageSwitcher } from '../LanguageSwitcher.tsx'
-import styles from './SectionNav.module.scss'
+import { LanguageSwitcher } from '../LanguageSwitcher.tsx';
+import styles from './SectionNav.module.scss';
 
-const SECTION_KEYS = ['about', 'experience', 'education', 'certificates', 'skills', 'contact']
+const SECTION_KEYS = ['about', 'experience', 'education', 'certificates', 'skills', 'contact'];
 
 export function SectionNav() {
-  const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
 
   const items = SECTION_KEYS.map((key) => ({
     key,
     href: `#${key}`,
     title: t(`nav.${key}`),
-  }))
+  }));
 
   return (
     <header className={styles.bar}>
       <div className={styles.desktopNav}>
-        <Anchor direction="horizontal" affix={false} targetOffset={80} items={items} />
+        <Anchor
+          direction="horizontal"
+          affix={false}
+          targetOffset={80}
+          items={items}
+        />
       </div>
 
       <Button
@@ -36,7 +41,12 @@ export function SectionNav() {
         <LanguageSwitcher />
       </div>
 
-      <Drawer placement="top" open={open} onClose={() => setOpen(false)} size="auto">
+      <Drawer
+        placement="top"
+        open={open}
+        onClose={() => setOpen(false)}
+        size="auto"
+      >
         <Anchor
           direction="vertical"
           affix={false}
@@ -46,6 +56,6 @@ export function SectionNav() {
         />
       </Drawer>
     </header>
-  )
+  );
 }
-export default SectionNav
+export default SectionNav;

@@ -1,10 +1,10 @@
-import { Segmented } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { Segmented } from 'antd';
+import { useTranslation } from 'react-i18next';
 
-import { supportedLanguages } from '../../i18n'
+import { supportedLanguages } from '../../i18n';
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation()
+  const { i18n } = useTranslation();
 
   return (
     <Segmented
@@ -15,5 +15,5 @@ export function LanguageSwitcher() {
         value: lng,
       }))}
     />
-  )
+  );
 }

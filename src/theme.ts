@@ -1,8 +1,8 @@
-import type { ThemeConfig } from 'antd'
-import { theme as antdTheme } from 'antd'
+import type { ThemeConfig } from 'antd';
+import { theme as antdTheme } from 'antd';
 
-const accent = '#5B6EF5'
-const fontFamily = "'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif"
+const accent = '#5B6EF5';
+const fontFamily = "'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif";
 
 export const lightTheme: ThemeConfig = {
   algorithm: antdTheme.defaultAlgorithm,
@@ -20,7 +20,7 @@ export const lightTheme: ThemeConfig = {
     colorBorder: '#DDE1EC',
     colorBorderSecondary: '#E7E9F3',
   },
-}
+};
 
 export const darkTheme: ThemeConfig = {
   algorithm: antdTheme.darkAlgorithm,
@@ -38,4 +38,4 @@ export const darkTheme: ThemeConfig = {
     colorBorder: '#33394A',
     colorBorderSecondary: '#2A2F3D',
   },
-}
+};

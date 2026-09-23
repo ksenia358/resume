@@ -1,16 +1,16 @@
-import genderFemale from '../../assets/icons/gender-female.svg'
-import genderMale from '../../assets/icons/gender-male.svg'
-import type { GenderCode } from '../../data/types.ts'
+import genderFemale from '../../assets/icons/gender-female.svg';
+import genderMale from '../../assets/icons/gender-male.svg';
+import type { GenderCode } from '../../data/types.ts';
 
 const ICONS: Record<GenderCode, string> = {
   female: genderFemale,
   male: genderMale,
-}
+};
 
 interface GenderIconProps {
-  code: GenderCode
-  label: string
-  size?: number
+  code: GenderCode;
+  label: string;
+  size?: number;
 }
 
 export function GenderIcon({ code, label, size = 20 }: GenderIconProps) {
@@ -22,5 +22,5 @@ export function GenderIcon({ code, label, size = 20 }: GenderIconProps) {
       height={size}
       style={{ verticalAlign: 'middle' }}
     />
-  )
+  );
 }

@@ -7,7 +7,7 @@
     "startDate": "2021-09",
     "endDate": null,
     "highlights": [
-      "Developing and evolving the admin panel on React and TypeScript: building new functionality and improving existing features",
+      "Developing and evolving the admin panel on React and TypeScript for the [sodrujestvo.org](https://sodrujestvo.org) website: building new functionality and improving existing features",
       "Building interfaces with Ant Design and an internal UI Kit, documenting components in Storybook",
       "Working with forms and validation using React Hook Form and Yup, managing state and API interaction via Redux Toolkit and RTK Query",
       "Integrating the frontend with backend APIs and SSO authentication (Casdoor, JWT)",
@@ -88,16 +88,7 @@
       "Maintaining existing projects: fixing bugs, refactoring, and evolving functionality",
       "Building user interfaces from design mockups, responsive and cross-browser markup"
     ],
-    "technologies": [
-      "HTML",
-      "JavaScript",
-      "CSS",
-      "Thymeleaf",
-      "Ajax",
-      "Git",
-      "Figma",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "JavaScript", "CSS", "Thymeleaf", "Ajax", "Git", "Figma", "PixelPerfect"],
     "web": true
   },
   {
@@ -110,15 +101,7 @@
       "Responsive, cross-browser markup of interfaces, individual site pages, and landing pages for promotions and special projects — pixel-perfect implementation from design mockups",
       "Supporting and improving the company's websites: fixing bugs, making changes, and enhancing existing markup"
     ],
-    "technologies": [
-      "HTML",
-      "JavaScript",
-      "CSS",
-      "jQuery",
-      "Git",
-      "Adobe Photoshop",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "JavaScript", "CSS", "jQuery", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -134,12 +117,7 @@
       "Integrating with a backend API",
       "Maintaining the application and fixing bugs"
     ],
-    "technologies": [
-      "Xamarin",
-      "Git",
-      "Adobe Photoshop",
-      "PixelPerfect"
-    ],
+    "technologies": ["Xamarin", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -154,15 +132,7 @@
       "Supporting and evolving the corporate website: fixing bugs, improving existing features and building new ones",
       "Building the company's landing page from scratch"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "Visual Studio (C#)",
-      "Adobe Photoshop",
-      "SVN",
-      "PixelPerfect"
-    ],
+    "technologies": ["HTML", "CSS", "jQuery", "Visual Studio (C#)", "Adobe Photoshop", "SVN", "PixelPerfect"],
     "web": true
   },
   {
@@ -171,16 +141,8 @@
     "role": "Frontend Developer",
     "startDate": "2015-02",
     "endDate": "2015-07",
-    "highlights": [
-      "Responsive markup of widgets for integration into client websites"
-    ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "PixelPerfect",
-      "Adobe Photoshop"
-    ],
+    "highlights": ["Responsive markup of widgets for integration into client websites"],
+    "technologies": ["HTML", "CSS", "jQuery", "PixelPerfect", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -189,10 +151,7 @@
     "role": "HTML Markup Developer",
     "startDate": "2014-08",
     "endDate": "2015-02",
-    "highlights": [
-      "Developing and maintaining a website using Erlang",
-      "Migrating an existing website to Angular"
-    ],
+    "highlights": ["Developing and maintaining a website using Erlang", "Migrating an existing website to Angular"],
     "technologies": [
       "HTML",
       "CSS",
@@ -218,15 +177,7 @@
       "Setting up, managing, and optimizing ad campaigns in Yandex Direct and Google Ads",
       "Building HTML emails with correct rendering across various email clients; preparing email newsletters"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "jQuery",
-      "SEO",
-      "Yandex.Direct",
-      "Google Ads",
-      "Adobe Photoshop"
-    ],
+    "technologies": ["HTML", "CSS", "jQuery", "SEO", "Yandex.Direct", "Google Ads", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -240,12 +191,7 @@
       "Markup and SEO optimization of company websites; promoting pages into the top 10 search results",
       "Preparing technical specifications and assigning tasks to contractors (copywriters and developers), monitoring completion"
     ],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "SEO",
-      "Adobe Photoshop"
-    ],
+    "technologies": ["HTML", "CSS", "SEO", "Adobe Photoshop"],
     "web": true
   },
   {

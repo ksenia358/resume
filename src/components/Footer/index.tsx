@@ -1,15 +1,18 @@
-import { Typography } from 'antd'
+import { Typography } from 'antd';
 
-const { Text } = Typography
+const { Text } = Typography;
 
-import styles from './Footer.module.scss'
+import styles from './Footer.module.scss';
 export function Footer() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
-    <Text type="secondary" className={styles.footer}>
+    <Text
+      type="secondary"
+      className={styles.footer}
+    >
       &copy; Copyright {year}
     </Text>
-  )
+  );
 }
-export default Footer
+export default Footer;

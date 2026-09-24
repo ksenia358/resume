@@ -43,6 +43,7 @@ export function ContactForm() {
       onFinish={handleSubmit(onSubmit)}
     >
       <Form.Item
+        required
         label={t('contact.name')}
         validateStatus={errors.name ? 'error' : ''}
         help={errors.name?.message}
@@ -60,6 +61,7 @@ export function ContactForm() {
       </Form.Item>
 
       <Form.Item
+        required
         label={t('contact.email')}
         validateStatus={errors.email ? 'error' : ''}
         help={errors.email?.message}
@@ -78,6 +80,7 @@ export function ContactForm() {
       </Form.Item>
 
       <Form.Item
+        required
         label={t('contact.message')}
         validateStatus={errors.message ? 'error' : ''}
         help={errors.message?.message}
@@ -99,6 +102,7 @@ export function ContactForm() {
         <Button
           type="primary"
           htmlType="submit"
+          block
           loading={isSubmitting}
           size={'large'}
         >

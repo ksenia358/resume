@@ -62,7 +62,7 @@ export function TechMatch({ onApply }: TechMatchProps) {
   const knownNames = useMemo(() => {
     const names = new Set<string>();
     experience.forEach((item) => item.technologies?.forEach((tech) => names.add(tech)));
-    skills.forEach((group) => group.items.forEach((tech) => names.add(tech)));
+    skills.forEach((tech) => names.add(tech));
     return [...names].sort((a, b) => a.localeCompare(b));
   }, [experience, skills]);
 

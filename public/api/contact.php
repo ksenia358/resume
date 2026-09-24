@@ -134,6 +134,42 @@ function smtpSendVia(string $scheme, string $host, int $port, array $config, str
     return $error;
 }
 
+// Sends a plain-text message through the Telegram Bot API. Returns null on success or an error.
+function telegramSend(string $token, string $chatId, string $text): ?string
+{
+    $url = 'https://api.telegram.org/bot' . $token . '/sendMessage';
+    $payload = http_build_query(['chat_id' => $chatId, 'text' => $text, 'disable_web_page_preview' => 'true']);
+
+    if (function_exists('curl_init')) {
+        $curl = curl_init($url);
+        curl_setopt_array($curl, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 15,
+        ]);
+        $response = curl_exec($curl);
+        $transportError = $response === false ? curl_error($curl) : null;
+        curl_close($curl);
+    } else {
+        $response = @file_get_contents($url, false, stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => $payload,
+            'timeout' => 15,
+            'ignore_errors' => true,
+        ]]));
+        $transportError = $response === false ? (error_get_last()['message'] ?? 'request failed') : null;
+    }
+
+    if ($transportError !== null) {
+        // The token is part of the URL, so keep it out of error messages.
+        return str_replace($token, '***', $transportError);
+    }
+    $result = json_decode((string) $response, true);
+    return !empty($result['ok']) ? null : (string) ($result['description'] ?? 'unexpected response');
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     header('Allow: POST');
     respond(405, ['ok' => false, 'error' => 'method_not_allowed']);
@@ -274,8 +310,24 @@ if ($pdo !== null && $messageId !== null && $mailSent) {
     $pdo->prepare('UPDATE contact_messages SET mail_sent = 1 WHERE id = ?')->execute([$messageId]);
 }
 
-if ($messageId === null && !$mailSent) {
-    // Status codes only (no details) so a failed deploy can be diagnosed from the browser.
+// --- Telegram (fallback when no email went out) ---
+$telegramSent = false;
+$telegramError = 'not_configured';
+
+if (!$mailSent && !empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id'])) {
+    $text = "Сообщение с сайта-резюме\n\nИмя: {$name}\nEmail: {$email}\n\n{$message}";
+    if (textLength($text) > 4000) {
+        $text = (function_exists('mb_substr') ? mb_substr($text, 0, 4000, 'UTF-8') : substr($text, 0, 4000)) . '…';
+    }
+    $telegramError = telegramSend((string) $config['telegram_bot_token'], (string) $config['telegram_chat_id'], $text);
+    $telegramSent = $telegramError === null;
+    if (!$telegramSent) {
+        error_log("contact.php: Telegram failed: {$telegramError}");
+    }
+}
+
+if ($messageId === null && !$mailSent && !$telegramSent) {
+    // Status codes only (no secrets) so a failed deploy can be diagnosed from the browser.
     respond(500, [
         'ok' => false,
         'error' => 'delivery_failed',
@@ -283,6 +335,7 @@ if ($messageId === null && !$mailSent) {
         'mail' => $mailError,
         // SMTP server replies / connection errors; they never include the password.
         'mail_details' => array_values(array_unique($mailDetails)),
+        'telegram' => $telegramError,
     ]);
 }
 

@@ -1,5 +1,5 @@
 import type { SupportedLanguage } from '../i18n';
-import type { CertificateItem, EducationItem, ExperienceItem, ProfileInfo, SkillGroup } from '../data/types';
+import type { CertificateItem, EducationItem, ExperienceItem, ProfileInfo } from '../data/types';
 
 // Local JSON for now; swap each loader's body for a fetch to the PHP API once it exists.
 export async function getExperience(lang: SupportedLanguage): Promise<ExperienceItem[]> {
@@ -25,7 +25,7 @@ export async function getCertificates(lang: SupportedLanguage): Promise<Certific
   return module.default;
 }
 
-export async function getSkills(lang: SupportedLanguage): Promise<SkillGroup[]> {
+export async function getSkills(lang: SupportedLanguage): Promise<string[]> {
   const module = await import(`../data/content/${lang}/skills.json`);
   return module.default;
 }

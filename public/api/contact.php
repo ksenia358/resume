@@ -146,7 +146,9 @@ function telegramSend(string $token, string $chatId, string $text): ?string
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $payload,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 15,
+            // Telegram may be unreachable from the hosting; don't keep the visitor waiting on it.
+            CURLOPT_CONNECTTIMEOUT => 3,
+            CURLOPT_TIMEOUT => 6,
         ]);
         $response = curl_exec($curl);
         $transportError = $response === false ? curl_error($curl) : null;
@@ -156,7 +158,7 @@ function telegramSend(string $token, string $chatId, string $text): ?string
             'method' => 'POST',
             'header' => 'Content-Type: application/x-www-form-urlencoded',
             'content' => $payload,
-            'timeout' => 15,
+            'timeout' => 6,
             'ignore_errors' => true,
         ]]));
         $transportError = $response === false ? (error_get_last()['message'] ?? 'request failed') : null;

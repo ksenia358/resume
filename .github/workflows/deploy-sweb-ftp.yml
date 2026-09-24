@@ -45,6 +45,8 @@ jobs:
           DB_PASSWORD: ${{ secrets.SWEB_DB_PASSWORD }}
           MAIL_TO: ${{ secrets.CONTACT_MAIL_TO }}
           MAIL_FROM: ${{ secrets.CONTACT_MAIL_FROM }}
+          SMTP_HOST: ${{ secrets.CONTACT_SMTP_HOST }}
+          SMTP_PASSWORD: ${{ secrets.CONTACT_SMTP_PASSWORD }}
         run: |
           php -r 'file_put_contents("dist/api/config.php", "<?php\n\nreturn " . var_export([
             "db_host" => getenv("DB_HOST") ?: "localhost",
@@ -53,6 +55,9 @@ jobs:
             "db_password" => getenv("DB_PASSWORD") ?: "",
             "mail_to" => getenv("MAIL_TO") ?: "derievaks@gmail.com, ks-31@mail.ru",
             "mail_from" => getenv("MAIL_FROM") ?: "noreply@aceventura.ru",
+            "smtp_host" => getenv("SMTP_HOST") ?: "smtp.spaceweb.ru",
+            "smtp_port" => 465,
+            "smtp_password" => getenv("SMTP_PASSWORD") ?: "",
           ], true) . ";\n");'
           php -l dist/api/config.php
 

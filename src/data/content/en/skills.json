@@ -1,88 +1,67 @@
 [
-  {
-    "id": "frontend-core",
-    "category": "Frontend",
-    "items": ["React", "Vue.js", "Angular", "TypeScript", "JavaScript", "Next.js (App Router, SSR/SSG)", "Vite"]
-  },
-  {
-    "id": "mobile",
-    "category": "Mobile Development",
-    "items": ["Xamarin"]
-  },
-  {
-    "id": "web-fundamentals",
-    "category": "Web Fundamentals",
-    "items": ["HTML", "CSS", "jQuery", "Ajax", "Pug"]
-  },
-  {
-    "id": "ui-design-systems",
-    "category": "UI Libraries & Design Systems",
-    "items": ["Ant Design", "Internal UI-kit component development", "Storybook"]
-  },
-  {
-    "id": "forms",
-    "category": "Forms & Validation",
-    "items": ["React Hook Form", "Yup", "Custom validation schemas"]
-  },
-  {
-    "id": "state-data",
-    "category": "State & Data",
-    "items": ["Redux Toolkit", "RTK Query", "MSW (Mock Service Worker)", "Axios"]
-  },
-  {
-    "id": "i18n",
-    "category": "Internationalization",
-    "items": ["i18next", "Multi-language routing", "RTL support", "SEO alternates for multilingual pages"]
-  },
-  {
-    "id": "testing",
-    "category": "Testing",
-    "items": ["Vitest", "Playwright (E2E)"]
-  },
-  {
-    "id": "styling",
-    "category": "Styling",
-    "items": ["Sass / SCSS", "Less", "CSS Modules", "classnames"]
-  },
-  {
-    "id": "interactive-ui",
-    "category": "Interactive Components",
-    "items": ["@dnd-kit (drag-and-drop)", "EditorJS", "react-dropzone", "date-fns / luxon"]
-  },
-  {
-    "id": "auth",
-    "category": "Authentication & SSO",
-    "items": ["Casdoor SSO integration", "Registration & 2FA forms", "OAuth (VK)", "JWT"]
-  },
-  {
-    "id": "design-tools",
-    "category": "Design Tools",
-    "items": ["Figma", "Adobe Photoshop", "Zeplin", "PixelPerfect"]
-  },
-  {
-    "id": "ai-tools",
-    "category": "AI Development Tools",
-    "items": ["Claude Code", "ChatGPT"]
-  },
-  {
-    "id": "marketing",
-    "category": "Marketing & SEO",
-    "items": ["SEO", "Yandex.Direct", "Google Ads"]
-  },
-  {
-    "id": "process",
-    "category": "Development Process",
-    "items": [
-      "Git",
-      "SVN",
-      "Jira",
-      "Feature flags",
-      "GitLab flow",
-      "Code review",
-      "ESLint",
-      "JetBrains PhpStorm",
-      "JetBrains IntelliJ IDEA",
-      "Visual Studio (C#)"
-    ]
-  }
+  "HTML",
+  "Pug",
+  "Thymeleaf",
+  "Sass / SCSS",
+  "Less",
+  "CSS",
+  "React",
+  "Vue.js",
+  "Angular",
+  "JavaScript",
+  "TypeScript",
+  "jQuery",
+  "Axios",
+  "Ajax",
+  "Xamarin",
+  "Next.js (App Router, SSR/SSG)",
+  "Ant Design",
+  "Bootstrap",
+  "Git",
+  "SVN",
+  "PixelPerfect",
+  "Figma",
+  "Zeplin",
+  "Adobe Photoshop",
+  "JetBrains PhpStorm",
+  "JetBrains IntelliJ IDEA",
+  "Visual Studio (C#)",
+  "Sublime Text",
+  "Internal UI-kit component development",
+  "Storybook",
+  "SEO",
+  "Yandex.Direct",
+  "Google Ads",
+  "i18next",
+  "Code review",
+  "React Hook Form",
+  "Yup",
+  "RTK Query",
+  "Redux Toolkit",
+  "Vite",
+  "Vitest",
+  "Playwright (E2E)",
+  "Casdoor SSO integration",
+  "JWT",
+  "Jira",
+  "Redmine",
+  "Bitrix24",
+  "ESLint",
+  "GitLab flow",
+  "Claude Code",
+  "ChatGPT",
+  "CSS Modules",
+  "classnames",
+  "Multi-language routing",
+  "Custom validation schemas",
+  "date-fns / luxon",
+  "MSW (Mock Service Worker)",
+  "Registration & 2FA forms",
+  "EditorJS",
+  "react-dropzone",
+  "OAuth (VK)",
+  "@dnd-kit (drag-and-drop)",
+  "RTL support",
+  "SEO alternates for multilingual pages",
+  "Feature flags"
 ]

@@ -11,7 +11,7 @@ import { Footer } from './components/Footer';
 import { GenderBadge } from './components/GenderBadge';
 import { Profile } from './components/Profile';
 import { SectionNav } from './components/Header/SectionNav';
-// import { Skills } from './components/Skills'
+import { Skills } from './components/Skills';
 import { ThemeToggle } from './components/ThemeToggle';
 import styles from './App.module.scss';
 import classNames from 'classnames';
@@ -103,9 +103,14 @@ function App() {
           <Certificates />
         </Card>
 
-        {/*<Card classNames={{ header: styles['card-header'] }} className={styles.card} id="skills" title={t('skills.title')}>*/}
-        {/*  <Skills />*/}
-        {/*</Card>*/}
+        <Card
+          classNames={{ header: styles['card-header'] }}
+          className={styles.card}
+          id="skills"
+          title={t('skills.title')}
+        >
+          <Skills highlighted={matchedTechs} />
+        </Card>
 
         <Card
           classNames={{ header: styles['card-header'] }}

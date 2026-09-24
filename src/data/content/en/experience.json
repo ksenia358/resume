@@ -18,38 +18,6 @@
       "Initiated the introduction of Pixel Perfect interface checks into the development process — this approach is now used by the frontend team and QA to verify implementation matches design mockups",
       "Ranked in the team's top 3 developers for development quality (lowest defect count and task estimation accuracy), according to internal project statistics for 2026"
     ],
-    "technologies": [
-      "React",
-      "Vue.js",
-      "TypeScript",
-      "Vite",
-      "Pug",
-      "Ant Design",
-      "Internal UI-kit component development",
-      "Storybook",
-      "Redux Toolkit",
-      "RTK Query",
-      "Axios",
-      "React Hook Form",
-      "Yup",
-      "i18next",
-      "Vitest",
-      "Playwright (E2E)",
-      "Casdoor SSO integration",
-      "JWT",
-      "Git",
-      "GitLab flow",
-      "Code review",
-      "ESLint",
-      "Jira",
-      "JetBrains PhpStorm",
-      "Figma",
-      "PixelPerfect",
-      "Claude Code",
-      "ChatGPT",
-      "CSS",
-      "Sass / SCSS"
-    ],
     "web": true
   },
   {
@@ -62,18 +30,6 @@
       "Participating in the gradual migration of an existing website to Vue.js",
       "Supporting and evolving the existing project: fixing bugs and improving functionality",
       "Building interfaces from design mockups, pixel-perfect responsive and cross-browser markup"
-    ],
-    "technologies": [
-      "HTML",
-      "Vue.js",
-      "JavaScript",
-      "CSS",
-      "Sass / SCSS",
-      "Pug",
-      "jQuery",
-      "Git",
-      "Figma",
-      "PixelPerfect"
     ],
     "web": true
   },
@@ -88,7 +44,6 @@
       "Maintaining existing projects: fixing bugs, refactoring, and evolving functionality",
       "Building user interfaces from design mockups, responsive and cross-browser markup"
     ],
-    "technologies": ["HTML", "JavaScript", "CSS", "Thymeleaf", "Ajax", "Git", "Figma", "PixelPerfect"],
     "web": true
   },
   {
@@ -101,7 +56,6 @@
       "Responsive, cross-browser markup of interfaces, individual site pages, and landing pages for promotions and special projects — pixel-perfect implementation from design mockups",
       "Supporting and improving the company's websites: fixing bugs, making changes, and enhancing existing markup"
     ],
-    "technologies": ["HTML", "JavaScript", "CSS", "jQuery", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -117,7 +71,6 @@
       "Integrating with a backend API",
       "Maintaining the application and fixing bugs"
     ],
-    "technologies": ["Xamarin", "Git", "Adobe Photoshop", "PixelPerfect"],
     "web": true
   },
   {
@@ -132,7 +85,6 @@
       "Supporting and evolving the corporate website: fixing bugs, improving existing features and building new ones",
       "Building the company's landing page from scratch"
     ],
-    "technologies": ["HTML", "CSS", "jQuery", "Visual Studio (C#)", "Adobe Photoshop", "SVN", "PixelPerfect"],
     "web": true
   },
   {
@@ -142,7 +94,6 @@
     "startDate": "2015-02",
     "endDate": "2015-07",
     "highlights": ["Responsive markup of widgets for integration into client websites"],
-    "technologies": ["HTML", "CSS", "jQuery", "PixelPerfect", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -152,17 +103,6 @@
     "startDate": "2014-08",
     "endDate": "2015-02",
     "highlights": ["Developing and maintaining a website using Erlang", "Migrating an existing website to Angular"],
-    "technologies": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "jQuery",
-      "Angular",
-      "Git",
-      "Erlang",
-      "PixelPerfect",
-      "Adobe Photoshop"
-    ],
     "web": true
   },
   {
@@ -177,7 +117,6 @@
       "Setting up, managing, and optimizing ad campaigns in Yandex Direct and Google Ads",
       "Building HTML emails with correct rendering across various email clients; preparing email newsletters"
     ],
-    "technologies": ["HTML", "CSS", "jQuery", "SEO", "Yandex.Direct", "Google Ads", "Adobe Photoshop"],
     "web": true
   },
   {
@@ -191,7 +130,6 @@
       "Markup and SEO optimization of company websites; promoting pages into the top 10 search results",
       "Preparing technical specifications and assigning tasks to contractors (copywriters and developers), monitoring completion"
     ],
-    "technologies": ["HTML", "CSS", "SEO", "Adobe Photoshop"],
     "web": true
   },
   {

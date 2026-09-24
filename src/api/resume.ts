@@ -3,8 +3,16 @@ import type { CertificateItem, EducationItem, ExperienceItem, ProfileInfo, Skill
 
 // Local JSON for now; swap each loader's body for a fetch to the PHP API once it exists.
 export async function getExperience(lang: SupportedLanguage): Promise<ExperienceItem[]> {
-  const module = await import(`../data/content/${lang}/experience.json`);
-  return module.default;
+  const [module, technologies] = await Promise.all([
+    import(`../data/content/${lang}/experience.json`),
+    import('../data/content/technologies.json'),
+  ]);
+  // Technology tags are language-neutral, so they live in one shared file keyed by item id.
+  const tagsById: Record<string, string[]> = technologies.default;
+  return (module.default as Omit<ExperienceItem, 'technologies'>[]).map((item) => ({
+    ...item,
+    technologies: tagsById[item.id],
+  }));
 }
 
 export async function getEducation(lang: SupportedLanguage): Promise<EducationItem[]> {

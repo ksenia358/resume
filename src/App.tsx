@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Card, Flex, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +20,7 @@ const { Title, Text } = Typography;
 
 function App() {
   const { t } = useTranslation();
+  const [matchedTechs, setMatchedTechs] = useState<string[]>([]);
 
   return (
     <>
@@ -58,7 +60,7 @@ function App() {
                 {t('hero.tagline')}
               </Text>
               <div className={styles.profile}>
-                <Profile />
+                <Profile onTechMatch={setMatchedTechs} />
               </div>
             </div>
             <div className={styles.photoWrap}>
@@ -80,7 +82,7 @@ function App() {
           id="experience"
           title={<ExperienceTitle />}
         >
-          <Experience />
+          <Experience highlighted={matchedTechs} />
         </Card>
 
         <Card

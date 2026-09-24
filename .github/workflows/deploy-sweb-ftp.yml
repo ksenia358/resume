@@ -56,7 +56,6 @@ jobs:
             "mail_to" => getenv("MAIL_TO") ?: "derievaks@gmail.com, ks-31@mail.ru",
             "mail_from" => getenv("MAIL_FROM") ?: "noreply@aceventura.ru",
             "smtp_host" => getenv("SMTP_HOST") ?: "smtp.spaceweb.ru",
-            "smtp_port" => 465,
             "smtp_password" => getenv("SMTP_PASSWORD") ?: "",
           ], true) . ";\n");'
           php -l dist/api/config.php

@@ -28,25 +28,48 @@ function textLength(string $value): int
 }
 
 /**
- * Minimal SMTP client (implicit TLS + AUTH LOGIN), so mail goes out through the hosting's
+ * Minimal SMTP client (AUTH LOGIN over TLS), so mail goes out through the hosting's
  * mail server as a real mailbox instead of PHP's mail(). Returns null on success or an error.
+ *
+ * The hosting blocks some outgoing ports (465 is refused on sweb), so ports are tried in turn;
+ * only connection failures move on to the next one — auth or recipient errors would just repeat.
  */
 function smtpSend(array $config, string $to, string $subject, array $headers, string $encodedBody): ?string
 {
     $host = (string) ($config['smtp_host'] ?? 'smtp.spaceweb.ru');
-    $port = (int) ($config['smtp_port'] ?? 465);
-    $user = (string) ($config['smtp_user'] ?? '') ?: (string) $config['mail_from'];
+    $message = implode("\r\n", array_merge(
+        ['Date: ' . date('r'), 'To: ' . $to, 'Subject: ' . $subject],
+        $headers
+    )) . "\r\n\r\n" . $encodedBody;
 
-    $socket = @stream_socket_client("ssl://{$host}:{$port}", $errno, $errstr, 15);
+    $errors = [];
+    foreach ([['ssl', 465], ['tcp', 2525], ['tcp', 587], ['tcp', 25]] as [$scheme, $port]) {
+        $error = smtpSendVia($scheme, $host, $port, $config, $to, $message);
+        if ($error === null) {
+            return null;
+        }
+        $errors[] = "{$host}:{$port} {$error}";
+        if (strncmp($error, 'connect:', 8) !== 0) {
+            break;
+        }
+    }
+
+    return implode('; ', $errors);
+}
+
+// "ssl" connects with implicit TLS; "tcp" upgrades the plain connection with STARTTLS.
+function smtpSendVia(string $scheme, string $host, int $port, array $config, string $to, string $message): ?string
+{
+    $context = stream_context_create(['ssl' => ['peer_name' => $host]]);
+    $socket = @stream_socket_client("{$scheme}://{$host}:{$port}", $errno, $errstr, 8, STREAM_CLIENT_CONNECT, $context);
     if ($socket === false) {
         // TLS failures leave $errstr empty; the real reason is in the suppressed warning.
-        $reason = $errstr ?: (error_get_last()['message'] ?? 'unknown error');
-        return "connect {$host}:{$port}: {$reason}";
+        return 'connect: ' . ($errstr ?: (error_get_last()['message'] ?? 'unknown error'));
     }
     stream_set_timeout($socket, 15);
 
-    // Reads a (possibly multi-line) reply and checks its status code.
-    $expect = function (string $code) use ($socket): ?string {
+    // Reads a (possibly multi-line) reply.
+    $read = function () use ($socket): string {
         $reply = '';
         while (($line = fgets($socket, 515)) !== false) {
             $reply .= $line;
@@ -54,21 +77,41 @@ function smtpSend(array $config, string $to, string $subject, array $headers, st
                 break;
             }
         }
-        return strncmp($reply, $code, 3) === 0 ? null : (trim($reply) ?: 'no reply');
+        return $reply;
     };
-    $command = function (string $line, string $code) use ($socket, $expect): ?string {
+    $check = fn (string $reply, string $code): ?string => strncmp($reply, $code, 3) === 0 ? null : (trim($reply) ?: 'no reply');
+    $command = function (string $line, string $code) use ($socket, $read, $check): ?string {
         fwrite($socket, $line . "\r\n");
-        return $expect($code);
+        return $check($read(), $code);
     };
+    $ehlo = 'EHLO ' . ($_SERVER['SERVER_NAME'] ?? 'localhost');
+    $user = (string) ($config['smtp_user'] ?? '') ?: (string) $config['mail_from'];
 
-    $message = implode("\r\n", array_merge(
-        ['Date: ' . date('r'), 'To: ' . $to, 'Subject: ' . $subject],
-        $headers
-    )) . "\r\n\r\n" . $encodedBody;
+    $error = $check($read(), '220');
+    if ($error === null && $scheme === 'tcp') {
+        fwrite($socket, $ehlo . "\r\n");
+        $capabilities = $read();
+        $error = $check($capabilities, '250');
+        if ($error === null && stripos($capabilities, 'STARTTLS') === false) {
+            // Never send the password over an unencrypted connection.
+            $error = 'server does not offer STARTTLS';
+        }
+        if ($error === null) {
+            $error = $command('STARTTLS', '220');
+        }
+        if ($error === null) {
+            $methods = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+            if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+                $methods |= STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+            }
+            if (@stream_socket_enable_crypto($socket, true, $methods) !== true) {
+                $error = 'STARTTLS handshake failed: ' . (error_get_last()['message'] ?? 'unknown error');
+            }
+        }
+    }
 
     $steps = [
-        fn () => $expect('220'),
-        fn () => $command('EHLO ' . ($_SERVER['SERVER_NAME'] ?? 'localhost'), '250'),
+        fn () => $command($ehlo, '250'),
         fn () => $command('AUTH LOGIN', '334'),
         fn () => $command(base64_encode($user), '334'),
         fn () => $command(base64_encode((string) $config['smtp_password']), '235'),
@@ -78,13 +121,13 @@ function smtpSend(array $config, string $to, string $subject, array $headers, st
         // Base64 body lines never start with "." so no dot-stuffing is needed.
         fn () => $command($message . "\r\n.", '250'),
     ];
-
-    $error = null;
     foreach ($steps as $step) {
-        if (($error = $step()) !== null) {
+        if ($error !== null) {
             break;
         }
+        $error = $step();
     }
+
     fwrite($socket, "QUIT\r\n");
     fclose($socket);
 

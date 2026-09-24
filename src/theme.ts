@@ -38,4 +38,12 @@ export const darkTheme: ThemeConfig = {
     colorBorder: '#33394A',
     colorBorderSecondary: '#2A2F3D',
   },
+  components: {
+    // Match the cards instead of antd's default elevated grey.
+    Modal: {
+      contentBg: '#20242F',
+      headerBg: '#20242F',
+      footerBg: '#20242F',
+    },
+  },
 };

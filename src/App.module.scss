@@ -12,17 +12,26 @@
   border-color: transparent;
   border-radius: 0;
   @media (min-width: 768px) {
-    border-color: #e7e9f3;
     border-radius: 10px;
+    :global(html[data-theme='light']) & {
+      border-color: #e7e9f3;
+    }
   }
 
   .card-header {
-    border-top: 1px solid #e7e9f3;
-    border-bottom: 1px solid transparent;
     border-radius: 0;
+    border-top: 1px solid #323640;
+    border-bottom: 1px solid transparent;
     @media (min-width: 768px) {
       border-top: 1px solid transparent;
-      border-bottom: 1px solid #e7e9f3;
+      border-bottom: 1px solid #323640;
+    }
+    :global(html[data-theme='light']) & {
+      border-top: 1px solid #e7e9f3;
+      @media (min-width: 768px) {
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid #e7e9f3;
+      }
     }
   }
 }

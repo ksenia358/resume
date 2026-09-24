@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next';
 import emailIcon from '../../assets/icons/contact-email.svg';
 import messageIcon from '../../assets/icons/contact-message.svg';
 import phoneIcon from '../../assets/icons/contact-phone.svg';
+import matchIcon from '../../assets/icons/contact-match.svg';
 import telegramIcon from '../../assets/icons/contact-telegram.svg';
 import { useProfile } from '../../hooks/useProfile.ts';
 // import { calculateAge } from '../../utils/calculateAge.ts'
 import { ContactRow } from '../ContactRow';
+import { TechMatch } from '../TechMatch';
 import styles from './Profile.module.scss';
 
 // const { Text } = Typography
@@ -18,7 +20,11 @@ function scrollToContact(e: MouseEvent<HTMLAnchorElement>) {
   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-export function Profile() {
+interface ProfileProps {
+  onTechMatch: (matched: string[]) => void;
+}
+
+export function Profile({ onTechMatch }: ProfileProps) {
   const { t } = useTranslation();
   const { data, loading } = useProfile();
 
@@ -38,11 +44,22 @@ export function Profile() {
 
       <div className={styles.grid}>
         <ContactRow
-          icon={phoneIcon}
-          iconLabel={t('profile.phone')}
-          items={data.phones}
-          renderItem={(phone) => <a href={`tel:${phone.replace(/[^+\d]/g, '')}`}>{phone}</a>}
+          icon={matchIcon}
+          iconLabel={t('techMatch.link')}
+          items={['tech-match']}
+          className={styles['no-print']}
+          renderItem={() => <TechMatch onApply={onTechMatch} />}
         />
+
+        {data.phones.map((phone) => (
+          <ContactRow
+            key={phone}
+            icon={phoneIcon}
+            iconLabel={t('profile.phone')}
+            items={[phone]}
+            renderItem={() => <a href={`tel:${phone.replace(/[^+\d]/g, '')}`}>{phone}</a>}
+          />
+        ))}
 
         <ContactRow
           icon={emailIcon}

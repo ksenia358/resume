@@ -21,6 +21,14 @@
     "showAll": "Show all previous jobs",
     "collapse": "Collapse"
   },
+  "techMatch": {
+    "link": "Am I a good fit?",
+    "title": "Let's see how well I fit your needs",
+    "label": "List your stack, separated by commas or Enter",
+    "summary": "Matches: {{matched}} of {{total}}",
+    "ok": "OK",
+    "reset": "Reset"
+  },
   "education": {
     "title": "Education",
     "showAll": "Show all education",

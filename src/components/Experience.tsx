@@ -61,7 +61,12 @@ export function ExperienceTitle() {
   );
 }
 
-export function Experience() {
+interface ExperienceProps {
+  // Technologies to mark green, e.g. the visitor's stack matched in TechMatch.
+  highlighted?: string[];
+}
+
+export function Experience({ highlighted = [] }: ExperienceProps) {
   const { t, i18n } = useTranslation();
   const { data, loading } = useResumeSection(getExperience);
   const lang = (i18n.resolvedLanguage ?? 'ru') as SupportedLanguage;
@@ -126,6 +131,7 @@ export function Experience() {
                     {item.technologies.map((tech) => (
                       <Tag
                         key={tech}
+                        color={highlighted.includes(tech) ? 'success' : undefined}
                         style={{ marginInlineEnd: 0 }}
                       >
                         {tech}

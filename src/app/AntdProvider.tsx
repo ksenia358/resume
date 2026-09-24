@@ -36,6 +36,8 @@ export function AntdProvider({ children }: PropsWithChildren) {
       <ConfigProvider
         locale={antdLocales[lang] ?? ruRU}
         theme={mode === 'dark' ? darkTheme : lightTheme}
+        modal={{ mask: { blur: true } }}
+        image={{ preview: { mask: { blur: true } } }}
       >
         {children}
       </ConfigProvider>

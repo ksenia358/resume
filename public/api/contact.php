@@ -242,6 +242,7 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
 
     // mail_to is a comma-separated list; each address gets its own copy.
     foreach (array_filter(array_map('trim', explode(',', (string) $config['mail_to']))) as $recipient) {
+        $sent = false;
         if (!empty($config['smtp_password'])) {
             $error = smtpSend($config, $recipient, $subject, $headers, $encodedBody);
             $sent = $error === null;
@@ -249,10 +250,17 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
                 error_log("contact.php: SMTP to {$recipient} failed: {$error}");
                 $mailDetails[] = $error;
             }
-        } else {
-            $sent = mail($recipient, $subject, $encodedBody, implode("\r\n", $headers), '-f' . $from);
+        }
+        // Shared hosting may block outgoing SMTP entirely; its local mail() is the fallback.
+        if (!$sent) {
+            $headerBlock = implode("\r\n", $headers);
+            error_clear_last(); // so a leftover SMTP warning isn't reported as the mail() reason
+            $sent = mail($recipient, $subject, $encodedBody, $headerBlock, '-f' . $from)
+                || mail($recipient, $subject, $encodedBody, $headerBlock);
             if (!$sent) {
-                error_log("contact.php: mail() to {$recipient} failed");
+                $lastError = error_get_last()['message'] ?? 'returned false';
+                error_log("contact.php: mail() to {$recipient} failed: {$lastError}");
+                $mailDetails[] = "mail(): {$lastError}";
             }
         }
         if ($sent) {
@@ -273,7 +281,6 @@ if ($messageId === null && !$mailSent) {
         'error' => 'delivery_failed',
         'db' => empty($config['db_name']) ? 'not_configured' : 'failed',
         'mail' => $mailError,
-        'transport' => empty($config['smtp_password']) ? 'mail()' : 'smtp',
         // SMTP server replies / connection errors; they never include the password.
         'mail_details' => array_values(array_unique($mailDetails)),
     ]);

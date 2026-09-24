@@ -39,7 +39,9 @@ function smtpSend(array $config, string $to, string $subject, array $headers, st
 
     $socket = @stream_socket_client("ssl://{$host}:{$port}", $errno, $errstr, 15);
     if ($socket === false) {
-        return "connect {$host}:{$port}: {$errstr}";
+        // TLS failures leave $errstr empty; the real reason is in the suppressed warning.
+        $reason = $errstr ?: (error_get_last()['message'] ?? 'unknown error');
+        return "connect {$host}:{$port}: {$reason}";
     }
     stream_set_timeout($socket, 15);
 
@@ -179,6 +181,7 @@ if (!empty($config['db_name'])) {
 // --- Email ---
 $mailSent = false;
 $mailError = 'not_configured';
+$mailDetails = [];
 
 if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
     $from = (string) $config['mail_from'];
@@ -201,6 +204,7 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
             $sent = $error === null;
             if (!$sent) {
                 error_log("contact.php: SMTP to {$recipient} failed: {$error}");
+                $mailDetails[] = $error;
             }
         } else {
             $sent = mail($recipient, $subject, $encodedBody, implode("\r\n", $headers), '-f' . $from);
@@ -227,6 +231,8 @@ if ($messageId === null && !$mailSent) {
         'db' => empty($config['db_name']) ? 'not_configured' : 'failed',
         'mail' => $mailError,
         'transport' => empty($config['smtp_password']) ? 'mail()' : 'smtp',
+        // SMTP server replies / connection errors; they never include the password.
+        'mail_details' => array_values(array_unique($mailDetails)),
     ]);
 }
 

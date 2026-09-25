@@ -32,8 +32,6 @@ jobs:
 
       - name: Build
         run: yarn build
-        env:
-          VITE_WEB3FORMS_KEYS: ${{ secrets.WEB3FORMS_KEYS }}
 
       - name: Check PHP syntax
         run: find dist/api -name '*.php' -print0 | xargs -0 -n1 php -l
@@ -51,6 +49,7 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.CONTACT_SMTP_PASSWORD }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_RELAY_URL: ${{ secrets.TELEGRAM_RELAY_URL }}
         run: |
           php -r 'file_put_contents("dist/api/config.php", "<?php\n\nreturn " . var_export([
             "db_host" => getenv("DB_HOST") ?: "localhost",
@@ -63,6 +62,7 @@ jobs:
             "smtp_password" => getenv("SMTP_PASSWORD") ?: "",
             "telegram_bot_token" => getenv("TELEGRAM_BOT_TOKEN") ?: "",
             "telegram_chat_id" => getenv("TELEGRAM_CHAT_ID") ?: "",
+            "telegram_relay_url" => getenv("TELEGRAM_RELAY_URL") ?: "",
           ], true) . ";\n");'
           php -l dist/api/config.php
 

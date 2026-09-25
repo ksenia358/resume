@@ -157,11 +157,22 @@ function smtpSendVia(string $scheme, string $host, int $port, array $config, str
     return $error;
 }
 
-// Sends a plain-text message through the Telegram Bot API. Returns null on success or an error.
-function telegramSend(string $token, string $chatId, string $text): ?string
+/**
+ * Sends a plain-text message through the Telegram Bot API. Returns null on success or an error.
+ *
+ * The hosting can't reach api.telegram.org, so with $relayUrl the request goes through
+ * a relay (deploy/telegram-relay.gs on Google Apps Script) that forwards it to Telegram.
+ */
+function telegramSend(string $token, string $chatId, string $text, string $relayUrl = ''): ?string
 {
-    $url = 'https://api.telegram.org/bot' . $token . '/sendMessage';
-    $payload = http_build_query(['chat_id' => $chatId, 'text' => $text, 'disable_web_page_preview' => 'true']);
+    $fields = ['chat_id' => $chatId, 'text' => $text, 'disable_web_page_preview' => 'true'];
+    if ($relayUrl !== '') {
+        $url = $relayUrl;
+        $fields['token'] = $token;
+    } else {
+        $url = 'https://api.telegram.org/bot' . $token . '/sendMessage';
+    }
+    $payload = http_build_query($fields);
 
     if (function_exists('curl_init')) {
         $curl = curl_init($url);
@@ -174,6 +185,8 @@ function telegramSend(string $token, string $chatId, string $text): ?string
             CURLOPT_TIMEOUT => 60,
             // A dead IPv6 route is a common cause of hanging connects.
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            // Apps Script answers with a redirect to the result.
+            CURLOPT_FOLLOWLOCATION => true,
         ]);
         $response = curl_exec($curl);
         $transportError = $response === false ? curl_error($curl) : null;
@@ -190,7 +203,7 @@ function telegramSend(string $token, string $chatId, string $text): ?string
     }
 
     if ($transportError !== null) {
-        // The token is part of the URL, so keep it out of error messages.
+        // The token may be part of the URL, so keep it out of error messages.
         return str_replace($token, '***', $transportError);
     }
     $result = json_decode((string) $response, true);
@@ -238,7 +251,6 @@ $userAgent = substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500);
 // --- Database (optional: skipped until DB secrets are set) ---
 $pdo = null;
 $messageId = null;
-$dbError = null;
 
 if (!empty($config['db_name'])) {
     try {
@@ -281,8 +293,6 @@ if (!empty($config['db_name'])) {
         $messageId = (int) $pdo->lastInsertId();
     } catch (PDOException $e) {
         error_log('contact.php: DB error: ' . $e->getMessage());
-        // PDO messages name the user and host but never the password.
-        $dbError = $e->getMessage();
         $pdo = null;
     }
 }
@@ -355,7 +365,12 @@ $sendTelegram = function () use ($config, $name, $email, $message): ?string {
     if (textLength($text) > 4000) {
         $text = (function_exists('mb_substr') ? mb_substr($text, 0, 4000, 'UTF-8') : substr($text, 0, 4000)) . '…';
     }
-    $error = telegramSend((string) $config['telegram_bot_token'], (string) $config['telegram_chat_id'], $text);
+    $error = telegramSend(
+        (string) $config['telegram_bot_token'],
+        (string) $config['telegram_chat_id'],
+        $text,
+        (string) ($config['telegram_relay_url'] ?? '')
+    );
     if ($error !== null) {
         error_log("contact.php: Telegram failed: {$error}");
     }
@@ -377,7 +392,6 @@ if ($waitForTelegram) {
 respondAndContinue($delivered ? 200 : 500, [
     'ok' => $delivered,
     'db' => $messageId !== null ? 'saved' : (empty($config['db_name']) ? 'not_configured' : 'failed'),
-    'db_details' => $dbError,
     'mail' => $mailSent ? 'sent' : $mailError,
     'mail_via' => $mailVia,
     // SMTP server replies / connection errors; they never include the password.

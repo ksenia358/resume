@@ -213,6 +213,7 @@ $userAgent = substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500);
 // --- Database (optional: skipped until DB secrets are set) ---
 $pdo = null;
 $messageId = null;
+$dbError = null;
 
 if (!empty($config['db_name'])) {
     try {
@@ -255,6 +256,8 @@ if (!empty($config['db_name'])) {
         $messageId = (int) $pdo->lastInsertId();
     } catch (PDOException $e) {
         error_log('contact.php: DB error: ' . $e->getMessage());
+        // PDO messages name the user and host but never the password.
+        $dbError = $e->getMessage();
         $pdo = null;
     }
 }
@@ -340,6 +343,7 @@ if ($messageId === null && !$mailSent && !$telegramSent) {
         'ok' => false,
         'error' => 'delivery_failed',
         'db' => empty($config['db_name']) ? 'not_configured' : 'failed',
+        'db_details' => $dbError,
         'mail' => $mailError,
         // SMTP server replies / connection errors; they never include the password.
         'mail_details' => array_values(array_unique($mailDetails)),
@@ -351,6 +355,7 @@ if ($messageId === null && !$mailSent && !$telegramSent) {
 respond(200, [
     'ok' => true,
     'db' => $messageId !== null ? 'saved' : (empty($config['db_name']) ? 'not_configured' : 'failed'),
+    'db_details' => $dbError,
     'mail' => $mailSent ? 'sent' : $mailError,
     'mail_via' => $mailVia,
     'mail_details' => array_values(array_unique($mailDetails)),

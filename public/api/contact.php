@@ -161,7 +161,7 @@ function smtpSendVia(string $scheme, string $host, int $port, array $config, str
  * Sends a plain-text message through the Telegram Bot API. Returns null on success or an error.
  *
  * The hosting can't reach api.telegram.org, so with $relayUrl the request goes through
- * a relay (deploy/telegram-relay.gs on Google Apps Script) that forwards it to Telegram.
+ * a relay (deploy/telegram-bot.gs on Google Apps Script) that forwards it to Telegram.
  */
 function telegramSend(string $token, string $chatId, string $text, string $relayUrl = ''): ?string
 {

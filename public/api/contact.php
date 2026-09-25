@@ -22,6 +22,29 @@ function respond(int $status, array $body): void
     exit;
 }
 
+/**
+ * Sends the response and closes the connection, but keeps the script running,
+ * so slow follow-up work (Telegram) doesn't keep the visitor waiting.
+ */
+function respondAndContinue(int $status, array $body): void
+{
+    ignore_user_abort(true);
+    set_time_limit(120);
+    $json = json_encode($body, JSON_UNESCAPED_UNICODE);
+    http_response_code($status);
+    header('Content-Length: ' . strlen($json));
+    header('Connection: close');
+    echo $json;
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    } else {
+        while (ob_get_level() > 0) {
+            ob_end_flush();
+        }
+        flush();
+    }
+}
+
 function textLength(string $value): int
 {
     return function_exists('mb_strlen') ? mb_strlen($value, 'UTF-8') : strlen($value);
@@ -146,9 +169,11 @@ function telegramSend(string $token, string $chatId, string $text): ?string
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $payload,
             CURLOPT_RETURNTRANSFER => true,
-            // Telegram may be unreachable from the hosting; don't keep the visitor waiting on it.
-            CURLOPT_CONNECTTIMEOUT => 3,
-            CURLOPT_TIMEOUT => 6,
+            // The hosting reaches Telegram slowly; this runs after the response, so waiting is fine.
+            CURLOPT_CONNECTTIMEOUT => 30,
+            CURLOPT_TIMEOUT => 60,
+            // A dead IPv6 route is a common cause of hanging connects.
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
         ]);
         $response = curl_exec($curl);
         $transportError = $response === false ? curl_error($curl) : null;
@@ -158,7 +183,7 @@ function telegramSend(string $token, string $chatId, string $text): ?string
             'method' => 'POST',
             'header' => 'Content-Type: application/x-www-form-urlencoded',
             'content' => $payload,
-            'timeout' => 6,
+            'timeout' => 60,
             'ignore_errors' => true,
         ]]));
         $transportError = $response === false ? (error_get_last()['message'] ?? 'request failed') : null;
@@ -213,6 +238,7 @@ $userAgent = substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500);
 // --- Database (optional: skipped until DB secrets are set) ---
 $pdo = null;
 $messageId = null;
+$dbError = null;
 
 if (!empty($config['db_name'])) {
     try {
@@ -255,6 +281,8 @@ if (!empty($config['db_name'])) {
         $messageId = (int) $pdo->lastInsertId();
     } catch (PDOException $e) {
         error_log('contact.php: DB error: ' . $e->getMessage());
+        // PDO messages name the user and host but never the password.
+        $dbError = $e->getMessage();
         $pdo = null;
     }
 }
@@ -286,11 +314,12 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
             $error = smtpSend($config, $recipient, $subject, $headers, $encodedBody);
             $sent = $error === null;
             if ($sent) {
-                $mailVia[$recipient] = 'smtp';
+                $mailVia[] = 'smtp';
             }
             if (!$sent) {
                 error_log("contact.php: SMTP to {$recipient} failed: {$error}");
-                $mailDetails[] = $error;
+                // The response is public, so recipient addresses are masked.
+                $mailDetails[] = str_replace($recipient, '***', $error);
             }
         }
         // Shared hosting may block outgoing SMTP entirely; its local mail() is the fallback.
@@ -300,7 +329,7 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
             $sent = mail($recipient, $subject, $encodedBody, $headerBlock, '-f' . $from)
                 || mail($recipient, $subject, $encodedBody, $headerBlock);
             // mail() only hands the letter to the local MTA; it can still be dropped later.
-            $mailVia[$recipient] = $sent ? 'mail()' : 'failed';
+            $mailVia[] = $sent ? 'mail()' : 'failed';
             if (!$sent) {
                 $lastError = error_get_last()['message'] ?? 'returned false';
                 error_log("contact.php: mail() to {$recipient} failed: {$lastError}");
@@ -318,41 +347,28 @@ if ($pdo !== null && $messageId !== null && $mailSent) {
     $pdo->prepare('UPDATE contact_messages SET mail_sent = 1 WHERE id = ?')->execute([$messageId]);
 }
 
-// --- Telegram (fallback when no email went out) ---
-$telegramSent = false;
-$telegramError = 'not_configured';
+$delivered = $messageId !== null || $mailSent;
 
-if (!$mailSent && !empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id'])) {
+// Delivery status (no secrets or addresses) so it can be checked in the browser's Network tab.
+respondAndContinue($delivered ? 200 : 500, [
+    'ok' => $delivered,
+    'db' => $messageId !== null ? 'saved' : (empty($config['db_name']) ? 'not_configured' : 'failed'),
+    'db_details' => $dbError,
+    'mail' => $mailSent ? 'sent' : $mailError,
+    'mail_via' => $mailVia,
+    // SMTP server replies / connection errors; they never include the password.
+    'mail_details' => array_values(array_unique($mailDetails)),
+    'telegram' => empty($config['telegram_bot_token']) || empty($config['telegram_chat_id']) ? 'not_configured' : 'queued',
+]);
+
+// --- Telegram (after the response: the hosting reaches it with long delays) ---
+if (!empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id'])) {
     $text = "Сообщение с сайта-резюме\n\nИмя: {$name}\nEmail: {$email}\n\n{$message}";
     if (textLength($text) > 4000) {
         $text = (function_exists('mb_substr') ? mb_substr($text, 0, 4000, 'UTF-8') : substr($text, 0, 4000)) . '…';
     }
     $telegramError = telegramSend((string) $config['telegram_bot_token'], (string) $config['telegram_chat_id'], $text);
-    $telegramSent = $telegramError === null;
-    if (!$telegramSent) {
+    if ($telegramError !== null) {
         error_log("contact.php: Telegram failed: {$telegramError}");
     }
 }
-
-if ($messageId === null && !$mailSent && !$telegramSent) {
-    // Status codes only (no secrets) so a failed deploy can be diagnosed from the browser.
-    respond(500, [
-        'ok' => false,
-        'error' => 'delivery_failed',
-        'db' => empty($config['db_name']) ? 'not_configured' : 'failed',
-        'mail' => $mailError,
-        // SMTP server replies / connection errors; they never include the password.
-        'mail_details' => array_values(array_unique($mailDetails)),
-        'telegram' => $telegramError,
-    ]);
-}
-
-// Delivery status (no secrets) so it can be checked in the browser's Network tab.
-respond(200, [
-    'ok' => true,
-    'db' => $messageId !== null ? 'saved' : (empty($config['db_name']) ? 'not_configured' : 'failed'),
-    'mail' => $mailSent ? 'sent' : $mailError,
-    'mail_via' => $mailVia,
-    'mail_details' => array_values(array_unique($mailDetails)),
-    'telegram' => $telegramSent ? 'sent' : $telegramError,
-]);

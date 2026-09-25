@@ -263,6 +263,7 @@ if (!empty($config['db_name'])) {
 $mailSent = false;
 $mailError = 'not_configured';
 $mailDetails = [];
+$mailVia = [];
 
 if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
     $from = (string) $config['mail_from'];
@@ -284,6 +285,9 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
         if (!empty($config['smtp_password'])) {
             $error = smtpSend($config, $recipient, $subject, $headers, $encodedBody);
             $sent = $error === null;
+            if ($sent) {
+                $mailVia[$recipient] = 'smtp';
+            }
             if (!$sent) {
                 error_log("contact.php: SMTP to {$recipient} failed: {$error}");
                 $mailDetails[] = $error;
@@ -295,6 +299,8 @@ if (!empty($config['mail_to']) && !empty($config['mail_from'])) {
             error_clear_last(); // so a leftover SMTP warning isn't reported as the mail() reason
             $sent = mail($recipient, $subject, $encodedBody, $headerBlock, '-f' . $from)
                 || mail($recipient, $subject, $encodedBody, $headerBlock);
+            // mail() only hands the letter to the local MTA; it can still be dropped later.
+            $mailVia[$recipient] = $sent ? 'mail()' : 'failed';
             if (!$sent) {
                 $lastError = error_get_last()['message'] ?? 'returned false';
                 error_log("contact.php: mail() to {$recipient} failed: {$lastError}");
@@ -341,4 +347,12 @@ if ($messageId === null && !$mailSent && !$telegramSent) {
     ]);
 }
 
-respond(200, ['ok' => true]);
+// Delivery status (no secrets) so it can be checked in the browser's Network tab.
+respond(200, [
+    'ok' => true,
+    'db' => $messageId !== null ? 'saved' : (empty($config['db_name']) ? 'not_configured' : 'failed'),
+    'mail' => $mailSent ? 'sent' : $mailError,
+    'mail_via' => $mailVia,
+    'mail_details' => array_values(array_unique($mailDetails)),
+    'telegram' => $telegramSent ? 'sent' : $telegramError,
+]);

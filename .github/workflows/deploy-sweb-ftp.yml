@@ -32,8 +32,6 @@ jobs:
 
       - name: Build
         run: yarn build
-        env:
-          VITE_WEB3FORMS_KEYS: ${{ secrets.WEB3FORMS_KEYS }}
 
       - name: Check PHP syntax
         run: find dist/api -name '*.php' -print0 | xargs -0 -n1 php -l

@@ -348,6 +348,30 @@ if ($pdo !== null && $messageId !== null && $mailSent) {
 }
 
 $delivered = $messageId !== null || $mailSent;
+$telegramConfigured = !empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id']);
+
+$sendTelegram = function () use ($config, $name, $email, $message): ?string {
+    $text = "Сообщение с сайта-резюме\n\nИмя: {$name}\nEmail: {$email}\n\n{$message}";
+    if (textLength($text) > 4000) {
+        $text = (function_exists('mb_substr') ? mb_substr($text, 0, 4000, 'UTF-8') : substr($text, 0, 4000)) . '…';
+    }
+    $error = telegramSend((string) $config['telegram_bot_token'], (string) $config['telegram_chat_id'], $text);
+    if ($error !== null) {
+        error_log("contact.php: Telegram failed: {$error}");
+    }
+    return $error;
+};
+
+// ?debug=telegram waits for Telegram and reports its result, to diagnose delivery from the browser.
+$waitForTelegram = $telegramConfigured && ($_GET['debug'] ?? '') === 'telegram';
+$telegramStatus = $telegramConfigured ? 'queued' : 'not_configured';
+$telegramSeconds = null;
+if ($waitForTelegram) {
+    $started = microtime(true);
+    set_time_limit(120);
+    $telegramStatus = $sendTelegram() ?? 'sent';
+    $telegramSeconds = round(microtime(true) - $started, 1);
+}
 
 // Delivery status (no secrets or addresses) so it can be checked in the browser's Network tab.
 respondAndContinue($delivered ? 200 : 500, [
@@ -358,17 +382,11 @@ respondAndContinue($delivered ? 200 : 500, [
     'mail_via' => $mailVia,
     // SMTP server replies / connection errors; they never include the password.
     'mail_details' => array_values(array_unique($mailDetails)),
-    'telegram' => empty($config['telegram_bot_token']) || empty($config['telegram_chat_id']) ? 'not_configured' : 'queued',
+    'telegram' => $telegramStatus,
+    'telegram_seconds' => $telegramSeconds,
 ]);
 
 // --- Telegram (after the response: the hosting reaches it with long delays) ---
-if (!empty($config['telegram_bot_token']) && !empty($config['telegram_chat_id'])) {
-    $text = "Сообщение с сайта-резюме\n\nИмя: {$name}\nEmail: {$email}\n\n{$message}";
-    if (textLength($text) > 4000) {
-        $text = (function_exists('mb_substr') ? mb_substr($text, 0, 4000, 'UTF-8') : substr($text, 0, 4000)) . '…';
-    }
-    $telegramError = telegramSend((string) $config['telegram_bot_token'], (string) $config['telegram_chat_id'], $text);
-    if ($telegramError !== null) {
-        error_log("contact.php: Telegram failed: {$telegramError}");
-    }
+if ($telegramConfigured && !$waitForTelegram) {
+    $sendTelegram();
 }

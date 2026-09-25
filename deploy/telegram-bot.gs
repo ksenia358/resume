@@ -6,13 +6,15 @@
  *    Deployed as a web app (execute as "Me", access "Anyone"); its /exec URL is the TELEGRAM_RELAY_URL secret.
  *    Editing this file doesn't change the deployed web app, so the relay URL stays the same.
  *
- * 2. Group bot (poll, every minute by a trigger): replies to swearing and to messages addressed to her.
+ * 2. Group bot (poll, every minute by a trigger): comments on every channel post, replies to swearing
+ *    and to messages addressed to her. For comments she must be in the channel's discussion group.
  *    Needs the BOT_TOKEN script property (Project Settings → Script Properties) and a one-time run of setup().
  *    Telegram privacy mode must stay disabled (/setprivacy → Disable), otherwise she doesn't see group messages.
  */
 
 const SWEAR_REPLY = 'ай-ай-ай! как не стыдно!';
 const MENTION_REPLY = 'ответила в директ!';
+const POST_COMMENT = 'Ни хрена себе как интересно!!!!';
 
 // Checked against each word after normalization (lowercase, ё → е, latin lookalikes → cyrillic, no repeated letters).
 const SWEAR_PATTERNS = [
@@ -93,6 +95,12 @@ function poll() {
 }
 
 function handleMessage(message, props) {
+  // A channel post shows up in its discussion group as an automatic forward; replying to it is a comment.
+  if (message.is_automatic_forward) {
+    reply(message, POST_COMMENT);
+    return;
+  }
+
   const text = message.text || message.caption || '';
   const isGroup = message.chat.type === 'group' || message.chat.type === 'supergroup';
   if (!text || !isGroup || (message.from && message.from.is_bot)) {

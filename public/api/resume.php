@@ -6,7 +6,8 @@ declare(strict_types=1);
  * Resume content endpoint: GET ?lang=ru|en returns the profile, experience, education,
  * certificates and skills for that language from MySQL.
  *
- * The tables are created on the first request and filled from seed/*.json while they're empty,
+ * The tables are created on the first request and filled from seed/*.json (copied from src/data/content
+ * by the build) while they're empty,
  * so after that the content is edited right in the database (e.g. phpMyAdmin), without a redeploy.
  */
 

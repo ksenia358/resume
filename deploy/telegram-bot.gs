@@ -150,9 +150,14 @@ function reply(message, text) {
 
 function api(method, params) {
   const token = PropertiesService.getScriptProperties().getProperty('BOT_TOKEN');
+  // UrlFetchApp may send big numbers like chat ids as "-1.00123456789E12", and Telegram answers "chat not found".
+  const payload = {};
+  Object.keys(params).forEach((key) => {
+    payload[key] = String(params[key]);
+  });
   const response = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/' + method, {
     method: 'post',
-    payload: params,
+    payload: payload,
     muteHttpExceptions: true,
   });
   const result = JSON.parse(response.getContentText());

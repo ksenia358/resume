@@ -1,0 +1,103 @@
+// A row fits a two-line prize name with a small note under it on a phone.
+.prize {
+  --item: 72px;
+  margin-top: 8px;
+  @media (min-width: 640px) {
+    --item: 64px;
+  }
+}
+
+// Three rows are visible: the prize in the middle and its neighbours above and below.
+.window {
+  position: relative;
+  height: calc(var(--item) * 3);
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #e8c872;
+  background: rgba(10, 30, 18, 0.65);
+  transition: box-shadow 0.4s;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--item);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(rgba(10, 30, 18, 0.85), rgba(10, 30, 18, 0.25));
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(rgba(10, 30, 18, 0.25), rgba(10, 30, 18, 0.85));
+  }
+}
+
+.stopped {
+  box-shadow: 0 0 18px 3px rgba(232, 200, 114, 0.75);
+}
+
+// The row the prize lands on.
+.line {
+  position: absolute;
+  top: var(--item);
+  left: 0;
+  right: 0;
+  height: var(--item);
+  border-top: 2px solid rgba(232, 200, 114, 0.8);
+  border-bottom: 2px solid rgba(232, 200, 114, 0.8);
+  background: rgba(232, 200, 114, 0.12);
+  pointer-events: none;
+}
+
+.reel {
+  animation: spin 3s cubic-bezier(0.3, 0.1, 0.25, 1) forwards;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: var(--item);
+  padding: 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #f3ead2;
+  @media (min-width: 640px) {
+    font-size: 19px;
+  }
+}
+
+.note {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.85;
+  @media (min-width: 640px) {
+    font-size: 13px;
+  }
+}
+
+// Starts with prize 1 in the middle row and ends with the badge there.
+@keyframes spin {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc((var(--stop) - 1) * var(--item) * -1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel {
+    animation-duration: 0.01s;
+  }
+}

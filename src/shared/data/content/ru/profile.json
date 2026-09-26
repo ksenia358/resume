@@ -1,9 +1,33 @@
 {
   "fullName": "Дериёва Ксения",
+  "role": "Frontend-разработчик",
+  "tagline": "который обожает верстать",
   "birthDate": "1994-05-23",
-  "gender": "Женский",
   "genderCode": "female",
   "phones": ["+7 (925) 024-42-75", "+1 (689) 243-48-58"],
-  "telegram": ["@makienkoks"],
-  "email": ["derievaks@gmail.com"]
+  "email": ["derievaks@gmail.com"],
+  "telegram": ["makienkoks"],
+  "gender": "Женский",
+  "phonesTogether": false,
+  "emailTogether": true,
+  "telegramTogether": true,
+  "showTechMatch": true,
+  "showWrite": true,
+  "contactsOrder": [
+    "phones:+7 (925) 024-42-75",
+    "email",
+    "write",
+    "phones:+1 (689) 243-48-58",
+    "telegram",
+    "techMatch"
+  ],
+  "contactsOrderMobile": [
+    "phones:+1 (689) 243-48-58",
+    "phones:+7 (925) 024-42-75",
+    "email",
+    "telegram",
+    "write",
+    "techMatch"
+  ],
+  "hiddenSections": ["skills"]
 }

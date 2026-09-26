@@ -12,6 +12,11 @@ interface ContactRowProps {
 }
 
 export function ContactRow({ className, icon, iconLabel, items, renderItem }: ContactRowProps) {
+  // No lone icon for a contact left empty in the resume.
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
     <Flex
       gap={8}

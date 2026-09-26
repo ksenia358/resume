@@ -5,7 +5,7 @@ import styles from './GenderBadge.module.scss';
 export function GenderBadge() {
   const { data } = useProfile();
 
-  if (!data) return null;
+  if (!data || data.genderCode === 'none') return null;
 
   return (
     <div className={styles.gender}>

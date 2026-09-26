@@ -8,11 +8,12 @@ import styles from './SectionNav.module.scss';
 
 const SECTION_KEYS = ['about', 'experience', 'education', 'certificates', 'skills', 'contact'];
 
-export function SectionNav() {
+// `hidden` are the sections turned off in the editor: no menu item leads to them.
+export function SectionNav({ hidden = [] }: { hidden?: string[] }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
-  const items = SECTION_KEYS.map((key) => ({
+  const items = SECTION_KEYS.filter((key) => !hidden.includes(key)).map((key) => ({
     key,
     href: `#${key}`,
     title: t(`nav.${key}`),

@@ -1,0 +1,40 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.photo {
+  position: relative;
+}
+
+.image {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+// The version the scan belongs to, over its corner.
+.lang {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  padding-inline: 4px;
+  pointer-events: none;
+}
+
+.delete {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+.add {
+  width: 88px;
+  height: 88px;
+  white-space: normal;
+  flex-direction: column;
+}

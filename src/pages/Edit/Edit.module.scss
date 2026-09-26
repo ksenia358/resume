@@ -1,0 +1,21 @@
+// Stays at the bottom while scrolling through the resume, clear of the theme button on the right.
+.toolbar {
+  position: fixed;
+  left: 16px;
+  right: 80px;
+  bottom: 16px;
+  z-index: 100;
+  max-width: 820px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #5b6ef5;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  :global(html[data-theme='dark']) & {
+    background: #20242f;
+  }
+}
+
+.actions {
+  margin-inline-start: auto;
+}

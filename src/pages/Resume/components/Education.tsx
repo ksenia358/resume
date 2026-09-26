@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getEducation } from '../../../shared/api/resume';
 import type { EducationItem } from '../../../shared/data/types';
 import { useResumeSection } from '../../../shared/hooks/useResumeSection';
+import { EditButton } from './EditButton';
 import { ExpandableList } from './ExpandableList';
 
 const { Text } = Typography;
@@ -102,6 +103,7 @@ function InstitutionContent({ group }: { group: InstitutionGroup }) {
           style={{ marginTop: 4 }}
         >
           <Text style={{ textTransform: 'lowercase' }}>{degree.degree}</Text>
+          <EditButton target={{ section: 'education', item: degree }} />
           <br />
           <Text type="secondary">
             {degree.endDate ? degree.endDate.split('-')[0] : t('common.present')}

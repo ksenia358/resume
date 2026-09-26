@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { SupportedLanguage } from '../../i18n';
+import { useResumeVersion } from './useResumeVersion';
 
 export function useResumeSection<T>(loader: (lang: SupportedLanguage) => Promise<T[]>): {
   data: T[];
@@ -9,6 +10,7 @@ export function useResumeSection<T>(loader: (lang: SupportedLanguage) => Promise
 } {
   const { i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? 'ru') as SupportedLanguage;
+  const version = useResumeVersion();
   const [state, setState] = useState<{ lang: SupportedLanguage | null; data: T[] }>({
     lang: null,
     data: [],
@@ -29,7 +31,7 @@ export function useResumeSection<T>(loader: (lang: SupportedLanguage) => Promise
     return () => {
       cancelled = true;
     };
-  }, [lang, loader]);
+  }, [lang, loader, version]);
 
   return { data: state.data, loading: state.lang !== lang };
 }

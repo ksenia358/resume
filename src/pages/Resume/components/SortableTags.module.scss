@@ -1,0 +1,9 @@
+.tag {
+  position: relative;
+  display: inline-flex;
+  cursor: grab;
+  touch-action: none;
+  &:active {
+    cursor: grabbing;
+  }
+}

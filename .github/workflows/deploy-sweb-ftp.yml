@@ -50,6 +50,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_RELAY_URL: ${{ secrets.TELEGRAM_RELAY_URL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
           php -r 'file_put_contents("dist/api/config.php", "<?php\n\nreturn " . var_export([
             "db_host" => getenv("DB_HOST") ?: "localhost",
@@ -63,6 +64,8 @@ jobs:
             "telegram_bot_token" => getenv("TELEGRAM_BOT_TOKEN") ?: "",
             "telegram_chat_id" => getenv("TELEGRAM_CHAT_ID") ?: "",
             "telegram_relay_url" => getenv("TELEGRAM_RELAY_URL") ?: "",
+            // Only a hash of the editor password reaches the server.
+            "admin_password_hash" => getenv("ADMIN_PASSWORD") ? password_hash(getenv("ADMIN_PASSWORD"), PASSWORD_DEFAULT) : "",
           ], true) . ";\n");'
           php -l dist/api/config.php
 

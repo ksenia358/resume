@@ -3,10 +3,11 @@ import { Image, Skeleton, Timeline, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { getCertificates } from '../../../shared/api/resume.ts';
-import { certificatePhotos, getOrderedPhotos } from '../../../shared/data/certificatePhotos.ts';
+import { getOrderedPhotos, photoUrl } from '../../../shared/data/certificatePhotos.ts';
 import type { CertificateItem } from '../../../shared/data/types.ts';
 import type { SupportedLanguage } from '../../../i18n';
 import { useResumeSection } from '../../../shared/hooks/useResumeSection.ts';
+import { EditButton } from './EditButton';
 import { ExpandableList } from './ExpandableList.tsx';
 
 const { Text } = Typography;
@@ -78,6 +79,7 @@ export function Certificates() {
                           )}
                         </Text>{' '}
                         <Text type="secondary">· {course.date}</Text>
+                        <EditButton target={{ section: 'certificates', item: course }} />
                       </div>
                     );
                   })}
@@ -114,11 +116,15 @@ function buildGallery(
   const startIndexById = new Map<string, number>();
 
   for (const item of data) {
-    const photos = certificatePhotos[item.id];
-    if (!photos) continue;
+    const photos = item.photos;
+    if (!photos?.length) continue;
 
     startIndexById.set(item.id, items.length);
-    items.push(...getOrderedPhotos(photos, lang).map((photo) => photo.src));
+    items.push(
+      ...getOrderedPhotos(photos, lang)
+        .map((photo) => photoUrl(photo.src))
+        .filter((url): url is string => Boolean(url)),
+    );
   }
 
   return { items, startIndexById };

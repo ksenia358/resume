@@ -2,13 +2,13 @@ import genderFemale from '../../../../shared/assets/icons/gender-female.svg';
 import genderMale from '../../../../shared/assets/icons/gender-male.svg';
 import type { GenderCode } from '../../../../shared/data/types.ts';
 
-const ICONS: Record<GenderCode, string> = {
+const ICONS: Record<Exclude<GenderCode, 'none'>, string> = {
   female: genderFemale,
   male: genderMale,
 };
 
 interface GenderIconProps {
-  code: GenderCode;
+  code: Exclude<GenderCode, 'none'>;
   label: string;
   size?: number;
 }

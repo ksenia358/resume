@@ -1,0 +1,38 @@
+{
+  "cert-react-2023": [
+    { "src": "practicum-2023-react-ru-2.jpg", "lang": "ru" },
+    { "src": "practicum-2023-react-ru-1.jpg", "lang": "ru" },
+    { "src": "practicum-2023-react-en-2.jpg", "lang": "en" },
+    { "src": "practicum-2023-react-en-1.jpg", "lang": "en" }
+  ],
+  "cert-specialist-2020-1": [
+    { "src": "specialist-2020-vue-basics-ru.jpg", "lang": "ru" },
+    { "src": "specialist-2020-vue-basics-en.jpg", "lang": "en" },
+    { "src": "specialist-2020-vue-basics-ru-udost.jpg", "lang": "ru", "isOfficialDocument": true }
+  ],
+  "cert-specialist-2020-2": [
+    { "src": "specialist-2020-vue-advanced-ru.jpg", "lang": "ru" },
+    { "src": "specialist-2020-vue-advanced-en.jpg", "lang": "en" },
+    { "src": "specialist-2020-vue-advanced-ru-udost.jpg", "lang": "ru", "isOfficialDocument": true }
+  ],
+  "cert-js-2011": [
+    { "src": "js-2011-ru.jpg", "lang": "ru" },
+    { "src": "js-2011-en.jpg", "lang": "en" }
+  ],
+  "cert-php-basics-2009": [
+    { "src": "php-basics-2009-ru.jpg", "lang": "ru" },
+    { "src": "php-basics-2009-en.jpg", "lang": "en" }
+  ],
+  "cert-programming-db-2009": [
+    { "src": "programming-db-2009-ru.jpg", "lang": "ru" },
+    { "src": "programming-db-2009-en.jpg", "lang": "en" }
+  ],
+  "cert-html-css-2009": [
+    { "src": "html-css-2009-ru.jpg", "lang": "ru" },
+    { "src": "html-css-2009-en.jpg", "lang": "en" }
+  ],
+  "cert-php-mysql-2010": [
+    { "src": "php-mysql-2010-ru.jpg", "lang": "ru" },
+    { "src": "php-mysql-2010-en.jpg", "lang": "en" }
+  ]
+}

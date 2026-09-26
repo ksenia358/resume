@@ -24,3 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# The resume version saved from the editor in `yarn dev` (vite/resumeDevApi.ts)
+.resume-version

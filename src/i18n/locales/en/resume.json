@@ -2,11 +2,6 @@
   "meta": {
     "title": "Resume"
   },
-  "hero": {
-    "name": "Kseniia Derieva",
-    "role": "Frontend Developer",
-    "tagline": "who loves crafting markup"
-  },
   "nav": {
     "about": "About",
     "experience": "Experience",

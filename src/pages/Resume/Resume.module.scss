@@ -84,3 +84,8 @@
     display: none !important;
   }
 }
+
+// A section hidden from the site, as it looks on the edit page.
+.hiddenSection {
+  opacity: 0.5;
+}

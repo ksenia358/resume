@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Alert, Button, Form, Input } from 'antd';
-import { useState } from 'react';
+import { Button, Form, Input, Modal, Result, Tooltip } from 'antd';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +24,15 @@ export function ContactForm() {
   } = useForm<ContactFormValues>({
     resolver: yupResolver(schema),
   });
+
+  // The error tooltip goes away by itself after a while.
+  useEffect(() => {
+    if (status !== 'error') {
+      return;
+    }
+    const timer = setTimeout(() => setStatus('idle'), 5000);
+    return () => clearTimeout(timer);
+  }, [status]);
 
   const onSubmit = async (values: ContactFormValues) => {
     setStatus('idle');
@@ -99,31 +108,48 @@ export function ContactForm() {
       </Form.Item>
 
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          block
-          loading={isSubmitting}
-          size={'large'}
+        {/* Right above the button the user just pressed, so it's seen without scrolling. A click outside closes it. */}
+        <Tooltip
+          open={status === 'error'}
+          trigger="click"
+          onOpenChange={(open) => !open && setStatus('idle')}
+          placement="top"
+          color="red"
+          title={t('contact.error')}
         >
-          {isSubmitting ? t('contact.sending') : t('contact.submit')}
-        </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            loading={isSubmitting}
+            size={'large'}
+          >
+            {isSubmitting ? t('contact.sending') : t('contact.submit')}
+          </Button>
+        </Tooltip>
       </Form.Item>
 
-      {status === 'success' && (
-        <Alert
-          type="success"
-          showIcon
-          message={t('contact.success')}
+      <Modal
+        open={status === 'success'}
+        centered
+        footer={null}
+        onCancel={() => setStatus('idle')}
+      >
+        <Result
+          status="success"
+          title={t('contact.success')}
+          subTitle={t('contact.successHint')}
+          extra={
+            <Button
+              type="primary"
+              size="large"
+              onClick={() => setStatus('idle')}
+            >
+              {t('contact.close')}
+            </Button>
+          }
         />
-      )}
-      {status === 'error' && (
-        <Alert
-          type="error"
-          showIcon
-          message={t('contact.error')}
-        />
-      )}
+      </Modal>
     </Form>
   );
 }

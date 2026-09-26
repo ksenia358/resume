@@ -14,6 +14,7 @@ type Props = {
   names: string[];
   // Without scores the seats are name inputs: the game hasn't started yet.
   scores?: number[];
+  showScores?: boolean;
   onNameChange?: (index: number, name: string) => void;
   dealer?: number;
   winners?: number[];
@@ -22,7 +23,16 @@ type Props = {
   children: ReactNode;
 };
 
-export function PokerTable({ names, scores, onNameChange, dealer, winners = [], champions = [], children }: Props) {
+export function PokerTable({
+  names,
+  scores,
+  showScores = true,
+  onNameChange,
+  dealer,
+  winners = [],
+  champions = [],
+  children,
+}: Props) {
   return (
     <div className={styles.wrap}>
       <div className={styles.rim}>
@@ -51,7 +61,9 @@ export function PokerTable({ names, scores, onNameChange, dealer, winners = [], 
           {scores ? (
             <>
               <div className={styles.name}>{name}</div>
-              <div className={classNames(styles.score, { [styles.negative]: scores[i] < 0 })}>{scores[i]}</div>
+              {showScores && (
+                <div className={classNames(styles.score, { [styles.negative]: scores[i] < 0 })}>{scores[i]}</div>
+              )}
             </>
           ) : (
             <Input

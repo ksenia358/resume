@@ -10,6 +10,8 @@ export type KingGame = {
   players: string[];
   // Saved deals by index in `deals`; unplayed ones are null.
   results: (DealCounts | null)[];
+  // Scores stay off the seats until the game is over.
+  hideScores?: boolean;
 };
 
 function loadGame(): KingGame | null {
@@ -59,8 +61,8 @@ export function useKingGame() {
   return {
     game,
     champions,
-    start: (players: string[], dealCount: number) =>
-      setGame({ players, results: Array.from({ length: dealCount }, () => null) }),
+    start: (players: string[], dealCount: number, hideScores: boolean) =>
+      setGame({ players, results: Array.from({ length: dealCount }, () => null), hideScores }),
     saveDeal: (index: number, counts: DealCounts) =>
       setGame(
         (current) =>

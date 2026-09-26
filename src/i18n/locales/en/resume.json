@@ -63,6 +63,8 @@
     "submit": "Send",
     "sending": "Sending...",
     "success": "Message sent, thank you!",
+    "successHint": "I'll get back to you soon.",
+    "close": "Close",
     "error": "Couldn't send the message. Please try again later.",
     "errors": {
       "nameRequired": "Name is required",

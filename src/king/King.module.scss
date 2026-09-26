@@ -40,6 +40,18 @@
   margin: 8px 0;
 }
 
+.hideScores {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #f3ead2 !important;
+  :global(.ant-checkbox-label) {
+    padding-inline: 6px 0;
+  }
+}
+
 .dealNumber {
   font-size: 12px;
   text-transform: uppercase;

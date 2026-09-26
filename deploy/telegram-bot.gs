@@ -103,7 +103,9 @@ function handleMessage(message, props) {
 
   const text = message.text || message.caption || '';
   const isGroup = message.chat.type === 'group' || message.chat.type === 'supergroup';
-  if (!text || !isGroup || (message.from && message.from.is_bot)) {
+  // Anonymous admins and channels post through service bots, so only skip bots that write as themselves.
+  const fromBot = message.from && message.from.is_bot && !message.sender_chat;
+  if (!text || !isGroup || fromBot) {
     return;
   }
 

@@ -1,0 +1,8 @@
+# Pages are routed in the browser (src/app/router.tsx): any address that isn't a real file
+# gets index.html, so /king opens directly. The PHP API keeps its own addresses.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ index.html [L]
+</IfModule>

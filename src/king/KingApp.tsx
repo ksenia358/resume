@@ -1,5 +1,5 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { Button, Card, Flex, Popconfirm, Segmented, Table, Typography } from 'antd';
+import { Button, Card, Checkbox, Flex, Popconfirm, Segmented, Table, Typography } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
 
@@ -20,6 +20,7 @@ export function KingApp() {
     Array.from({ length: MAX_PLAYERS }, (_, i) => game?.players[i] ?? ''),
   );
   const [playerCount, setPlayerCount] = useState(game?.players.length ?? MAX_PLAYERS);
+  const [hideScores, setHideScores] = useState(game?.hideScores ?? false);
   const [openDeal, setOpenDeal] = useState<number | null>(null);
 
   const points = game ? game.results.map((counts, i) => (counts ? dealPoints(deals[i], counts) : null)) : [];
@@ -41,6 +42,7 @@ export function KingApp() {
           <PokerTable
             names={game.players}
             scores={totals}
+            showScores={finished || !game.hideScores}
             dealer={finished ? undefined : nextDeal % game.players.length}
             winners={winners}
             champions={champions}
@@ -89,6 +91,15 @@ export function KingApp() {
               onChange={setPlayerCount}
               options={PLAYER_COUNTS.map((count) => ({ value: count, label: `${count} игрока` }))}
             />
+            <div>
+              <Checkbox
+                className={styles.hideScores}
+                checked={hideScores}
+                onChange={(event) => setHideScores(event.target.checked)}
+              >
+                Скрывать результаты
+              </Checkbox>
+            </div>
             <div className={styles.dealHint}>Уберите из колоды</div>
             <CardFan cards={removedCards(playerCount)} />
             <Button
@@ -99,6 +110,7 @@ export function KingApp() {
                 start(
                   names.slice(0, playerCount).map((name, i) => name.trim() || `Игрок ${i + 1}`),
                   deals.length,
+                  hideScores,
                 )
               }
             >

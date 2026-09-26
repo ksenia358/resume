@@ -15,6 +15,16 @@ header('X-Content-Type-Options: nosniff');
 
 const LANGUAGES = ['ru', 'en'];
 
+// ?debug=db also reports fatal errors that no catch sees, instead of an empty response.
+if (($_GET['debug'] ?? '') === 'db') {
+    register_shutdown_function(static function (): void {
+        $error = error_get_last();
+        if ($error !== null && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+            echo json_encode(['ok' => false, 'error' => 'fatal', 'details' => $error['message'], 'line' => $error['line']]);
+        }
+    });
+}
+
 function respond(int $status, array $body): void
 {
     http_response_code($status);
@@ -274,6 +284,8 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]
     );
+    // The hosting ignores the charset in the DSN; without this Cyrillic is saved and read back as garbage.
+    $pdo->exec('SET NAMES utf8mb4');
     createTables($pdo);
     seedIfEmpty($pdo);
     $resume = loadResume($pdo, $lang);
@@ -288,6 +300,20 @@ if ($resume === []) {
     respond(404, ['ok' => false, 'error' => 'not_found']);
 }
 
+$body = json_encode($resume, JSON_UNESCAPED_UNICODE);
+if ($body === false) {
+    error_log('resume.php: json_encode failed: ' . json_last_error_msg());
+    $details = [];
+    if (($_GET['debug'] ?? '') === 'db') {
+        // Which sections break the encoding, and how the connection is set up.
+        $details['details'] = json_last_error_msg();
+        $details['broken'] = array_keys(array_filter($resume, static fn ($section) => json_encode($section) === false));
+        $details['mysql'] = $pdo->query('SELECT VERSION()')->fetchColumn();
+        $details['charset'] = $pdo->query("SHOW VARIABLES LIKE 'character_set_%'")->fetchAll(PDO::FETCH_KEY_PAIR);
+    }
+    respond(500, ['ok' => false, 'error' => 'encode_failed'] + $details);
+}
+
 // Short cache: DB edits show up within a few minutes without hammering MySQL on every visit.
 header('Cache-Control: public, max-age=300');
-echo json_encode($resume, JSON_UNESCAPED_UNICODE);
+echo $body;

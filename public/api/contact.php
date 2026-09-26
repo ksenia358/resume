@@ -263,6 +263,8 @@ if (!empty($config['db_name'])) {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]
         );
+        // The hosting ignores the charset in the DSN; without this Cyrillic is saved as garbage.
+        $pdo->exec('SET NAMES utf8mb4');
 
         $pdo->exec(
             'CREATE TABLE IF NOT EXISTS contact_messages (

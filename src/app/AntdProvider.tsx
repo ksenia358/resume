@@ -5,7 +5,7 @@ import type { PropsWithChildren } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { lightTheme, darkTheme } from '../theme';
+import { lightTheme, darkTheme } from './theme';
 import { getInitialMode, STORAGE_KEY, ThemeModeContext, type ThemeMode } from './themeMode';
 
 const antdLocales = {

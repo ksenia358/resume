@@ -22,6 +22,7 @@ function respond(int $status, array $body): void
     exit;
 }
 
+// Lists are stored as JSON text and keys stay short, so old MySQL/MariaDB on shared hosting accept the schema too.
 function createTables(PDO $pdo): void
 {
     $tables = [
@@ -31,12 +32,12 @@ function createTables(PDO $pdo): void
             birth_date DATE NOT NULL,
             gender VARCHAR(50) NOT NULL,
             gender_code VARCHAR(10) NOT NULL,
-            phones JSON NOT NULL,
-            telegram JSON NOT NULL,
-            email JSON NOT NULL
+            phones TEXT NOT NULL,
+            telegram TEXT NOT NULL,
+            email TEXT NOT NULL
         )',
         'resume_experience (
-            id VARCHAR(100) NOT NULL,
+            id VARCHAR(64) NOT NULL,
             lang CHAR(2) NOT NULL,
             sort_order INT NOT NULL DEFAULT 0,
             company VARCHAR(200) NOT NULL,
@@ -46,18 +47,18 @@ function createTables(PDO $pdo): void
             start_date CHAR(7) NOT NULL,
             end_date CHAR(7) NULL,
             web TINYINT(1) NULL,
-            highlights JSON NOT NULL,
+            highlights TEXT NOT NULL,
             PRIMARY KEY (id, lang)
         )',
         // Technology tags don\'t depend on the language, so they are stored once per experience id.
         'resume_technologies (
-            experience_id VARCHAR(100) NOT NULL,
+            experience_id VARCHAR(64) NOT NULL,
             sort_order INT NOT NULL DEFAULT 0,
             name VARCHAR(100) NOT NULL,
-            PRIMARY KEY (experience_id, name)
+            PRIMARY KEY (experience_id, sort_order)
         )',
         'resume_education (
-            id VARCHAR(100) NOT NULL,
+            id VARCHAR(64) NOT NULL,
             lang CHAR(2) NOT NULL,
             sort_order INT NOT NULL DEFAULT 0,
             institution VARCHAR(300) NOT NULL,
@@ -71,7 +72,7 @@ function createTables(PDO $pdo): void
             PRIMARY KEY (id, lang)
         )',
         'resume_certificates (
-            id VARCHAR(100) NOT NULL,
+            id VARCHAR(64) NOT NULL,
             lang CHAR(2) NOT NULL,
             sort_order INT NOT NULL DEFAULT 0,
             name VARCHAR(300) NOT NULL,
@@ -85,7 +86,7 @@ function createTables(PDO $pdo): void
             lang CHAR(2) NOT NULL,
             sort_order INT NOT NULL DEFAULT 0,
             name VARCHAR(200) NOT NULL,
-            PRIMARY KEY (lang, name)
+            PRIMARY KEY (lang, sort_order)
         )',
     ];
     foreach ($tables as $table) {
@@ -278,7 +279,9 @@ try {
     $resume = loadResume($pdo, $lang);
 } catch (Throwable $e) {
     error_log('resume.php: ' . $e->getMessage());
-    respond(500, ['ok' => false, 'error' => 'server_error']);
+    // ?debug=db shows the database error itself, to diagnose the hosting from the browser.
+    $details = ($_GET['debug'] ?? '') === 'db' ? ['details' => $e->getMessage()] : [];
+    respond(500, ['ok' => false, 'error' => 'server_error'] + $details);
 }
 
 if ($resume === []) {

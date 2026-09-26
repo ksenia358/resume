@@ -17,11 +17,14 @@ export function useResumeSection<T>(loader: (lang: SupportedLanguage) => Promise
   useEffect(() => {
     let cancelled = false;
 
-    loader(lang).then((result) => {
-      if (!cancelled) {
-        setState({ lang, data: result });
-      }
-    });
+    loader(lang)
+      // Without the API the section just stays empty instead of loading forever.
+      .catch(() => [])
+      .then((result) => {
+        if (!cancelled) {
+          setState({ lang, data: result });
+        }
+      });
 
     return () => {
       cancelled = true;

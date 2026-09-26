@@ -16,11 +16,13 @@ export function useProfile(): { data: ProfileInfo | null; loading: boolean } {
   useEffect(() => {
     let cancelled = false;
 
-    getProfile(lang).then((result) => {
-      if (!cancelled) {
-        setState({ lang, data: result });
-      }
-    });
+    getProfile(lang)
+      .catch(() => null)
+      .then((result) => {
+        if (!cancelled) {
+          setState({ lang, data: result });
+        }
+      });
 
     return () => {
       cancelled = true;

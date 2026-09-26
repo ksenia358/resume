@@ -1,0 +1,66 @@
+.fan {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 4px;
+  padding-top: 6px;
+}
+
+.card {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+  height: 52px;
+  border-radius: 5px;
+  background: linear-gradient(160deg, #ffffff, #efe9dc);
+  box-shadow:
+    -2px 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  color: #1b2030;
+  transform-origin: 50% 120%;
+  & + & {
+    margin-left: -23px;
+  }
+  @media (min-width: 640px) {
+    width: 46px;
+    height: 66px;
+    & + & {
+      margin-left: -16px;
+    }
+  }
+}
+
+.back {
+  border: 3px solid #fff;
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 6px),
+    linear-gradient(160deg, #c0392b, #7b1d1d);
+}
+
+.red {
+  color: #c62828;
+}
+
+.corner {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  @media (min-width: 640px) {
+    font-size: 12px;
+  }
+}
+
+.suit {
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  font-size: 20px;
+  line-height: 1;
+  @media (min-width: 640px) {
+    font-size: 26px;
+  }
+}

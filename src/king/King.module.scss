@@ -1,0 +1,162 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 12px 4rem;
+  gap: 24px;
+  @media (min-width: 768px) {
+    padding: 2rem 1.5rem 4rem;
+  }
+}
+
+.card {
+  border-radius: 10px;
+  :global(.ant-card-body) {
+    padding: 8px;
+    @media (min-width: 768px) {
+      padding: 24px;
+    }
+  }
+  :global(html[data-theme='light']) & {
+    border-color: #e7e9f3;
+  }
+}
+
+.suits {
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: rgba(243, 234, 210, 0.55);
+}
+
+.tableTitle {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #e8c872;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.playerCount {
+  margin: 8px 0;
+}
+
+.dealNumber {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(243, 234, 210, 0.7);
+}
+
+.dealName {
+  margin: 4px 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #e8c872;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.winner {
+  margin-top: 4px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  color: #e8c872;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.dealHint {
+  font-size: 13px;
+  color: rgba(243, 234, 210, 0.85);
+}
+
+.tableButton {
+  margin-top: 16px;
+  background: #e8c872 !important;
+  color: #3b2a08 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.dealRow {
+  cursor: pointer;
+}
+
+.currentDeal > td {
+  background: rgba(91, 110, 245, 0.12) !important;
+}
+
+.pending {
+  opacity: 0.75;
+}
+
+.dealCell {
+  white-space: nowrap;
+}
+
+// Four score columns and the deal names have to fit a 360px phone.
+.scores :global(.ant-table-cell) {
+  padding-inline: 6px !important;
+}
+
+.dealer {
+  font-size: 12px;
+}
+
+.totals {
+  font-weight: 700;
+}
+
+.dealTable {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+  text-align: center;
+
+  th {
+    font-weight: 500;
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  td {
+    padding: 4px;
+  }
+}
+
+.playerName,
+.dealPlayer {
+  display: inline-block;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.dealCategory {
+  text-align: left;
+  font-size: 13px;
+}
+
+.left {
+  display: block;
+  font-size: 11px;
+}
+
+.dealPoints {
+  font-weight: 700;
+}
+
+.countInput {
+  width: 100%;
+  max-width: 64px;
+  input {
+    text-align: center;
+  }
+}
+
+.dealAlert {
+  margin-top: 16px;
+}

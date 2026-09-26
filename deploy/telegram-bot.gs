@@ -119,8 +119,7 @@ function handleMessage(message, props) {
 function hasSwearing(text) {
   return words(text).some(
     (word) =>
-      SWEAR_PATTERNS.some((pattern) => pattern.test(word)) &&
-      !SWEAR_EXCEPTIONS.some((pattern) => pattern.test(word))
+      SWEAR_PATTERNS.some((pattern) => pattern.test(word)) && !SWEAR_EXCEPTIONS.some((pattern) => pattern.test(word)),
   );
 }
 

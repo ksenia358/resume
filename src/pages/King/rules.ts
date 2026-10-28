@@ -2,8 +2,8 @@
 // "Don't take" deals come first, then the same ones as "take" with the sign flipped.
 // Both halves are worth the same, so correct totals always sum to zero.
 
-// Eralash (all penalties in one deal) is left out of the game for now.
-const WITH_ERALASH = false;
+// Eralash (all penalties in one deal) closes each half of the game.
+const WITH_ERALASH = true;
 
 export const PLAYER_COUNTS = [3, 4];
 export const MAX_PLAYERS = 4;
@@ -13,8 +13,8 @@ export type Category = 'tricks' | 'hearts' | 'boys' | 'queens' | 'lastTwo' | 'ki
 export const categories: Record<Category, { label: string; total: number }> = {
   tricks: { label: 'Взятки', total: 8 },
   hearts: { label: 'Черви', total: 8 },
-  // Boys are the kings, so the king of hearts is also a boy in Eralash.
-  boys: { label: 'Мальчики', total: 4 },
+  // Boys are the jacks and the kings, so the king of hearts is also a boy in Eralash.
+  boys: { label: 'Мальчики', total: 8 },
   queens: { label: 'Девочки', total: 4 },
   lastTwo: { label: 'Последние', total: 2 },
   king: { label: 'Кинг', total: 1 },
@@ -37,10 +37,10 @@ export type Game = {
 };
 
 const eralash: Game = {
-  name: 'Ералаш',
+  name: 'Ералаш — не брать ничего',
   short: 'Ералаш',
   hint: 'Все штрафы сразу',
-  points: { tricks: -2, hearts: -2, boys: -4, queens: -4, lastTwo: -8, king: -16 },
+  points: { tricks: -2, hearts: -2, boys: -2, queens: -4, lastTwo: -8, king: -16 },
 };
 
 const ranks = ['7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -75,9 +75,9 @@ const dontTake: Game[] = [
   {
     name: 'Не брать мальчиков',
     short: 'Мальчики',
-    hint: '−4 за короля',
-    cards: suits.map((suit) => 'K' + suit),
-    points: { boys: -4 },
+    hint: '−2 за валета или короля',
+    cards: ['J', 'K'].flatMap((rank) => suits.map((suit) => rank + suit)),
+    points: { boys: -2 },
   },
   {
     name: 'Не брать девочек',
@@ -95,14 +95,14 @@ const dontTake: Game[] = [
 const takeNames: Record<string, string> = {
   'Не брать взяток': 'Брать взятки',
   'Не брать червей': 'Брать черви',
-  Ералаш: 'Ералаш — брать всё',
+  'Ералаш — не брать ничего': 'Ералаш — брать всё',
 };
 
 const take: Game[] = dontTake.map((game) => ({
   ...game,
   name: takeNames[game.name] ?? game.name.replace('Не брать', 'Брать'),
   short: '+ ' + game.short,
-  hint: game.name === 'Ералаш' ? 'Все очки сразу' : game.hint.replace('−', '+'),
+  hint: game === eralash ? 'Все очки сразу' : game.hint.replace('−', '+'),
   points: Object.fromEntries(Object.entries(game.points).map(([category, points]) => [category, -points])),
 }));
 
